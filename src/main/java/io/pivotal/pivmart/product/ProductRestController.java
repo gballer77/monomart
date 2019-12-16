@@ -1,4 +1,4 @@
-package io.pivotal.pivmart;
+package io.pivotal.pivmart.product;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,11 @@ public class ProductRestController {
     }
 
     @GetMapping
-    public List<Product> list(@RequestParam String catalog) {
-        return productService.getForCatalog(catalog);
+    public List<Product> list(@RequestParam(value = "catalog", required = false) String catalogKey) {
+        if(catalogKey == null) {
+            return productService.getAll();
+        }
+
+        return productService.getForCatalog(catalogKey);
     }
 }
