@@ -1,11 +1,11 @@
 import * as React from "react";
-import {Category} from "../entities/Category";
+import {Catalog} from "../domain/category/Catalog";
 import {Dispatch} from "react";
 import {SetStateAction} from "react";
 import './ProductFilters.css'
 
 interface Props {
-  filterCategories: Category[];
+  filterCategories: Catalog[];
   activeCategory: string;
   setActiveFilterCategory: Dispatch<SetStateAction<string>>;
 }
@@ -24,10 +24,10 @@ export const ProductFilters = (props: Props) => {
       <div>
         {filterCategories.map((category, i) =>
           <button
-            key={`${i}_${category.catalog}`}
-            disabled={activeCategory === category.catalog}
+            key={`${i}_${category.catalogKey}`}
+            disabled={activeCategory === category.catalogKey}
             onClick={() => {
-              setActiveFilterCategory(category.catalog);
+              setActiveFilterCategory(category.catalogKey);
             }}>
             {category.displayName}
           </button>

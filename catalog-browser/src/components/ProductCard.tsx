@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Product} from "../entities/Product";
+import {Product} from "../domain/product/Product";
 
 interface Props {
   product: Product;

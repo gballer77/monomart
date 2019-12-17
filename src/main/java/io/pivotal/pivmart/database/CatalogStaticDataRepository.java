@@ -23,7 +23,7 @@ public class CatalogStaticDataRepository implements CatalogRepository {
     @Override
     public Catalog findByKey(String catalogKey) {
         return staticDatabase.getCatalogs().values().stream()
-                .filter(c -> catalogKey.equals(c.getKey()))
+                .filter(c -> catalogKey.equals(c.getCatalogKey()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(String.format("Could not find catalog with key %s", catalogKey)));
     }

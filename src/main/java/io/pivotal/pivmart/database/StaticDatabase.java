@@ -1,7 +1,9 @@
 package io.pivotal.pivmart.database;
 
 import io.pivotal.pivmart.catalog.Catalog;
+import io.pivotal.pivmart.product.CatalogFactory;
 import io.pivotal.pivmart.product.Product;
+import io.pivotal.pivmart.product.ProductFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -36,76 +38,17 @@ public class StaticDatabase {
     }
 
     public void seed() {
-        UUID homeGoods = save(Catalog.builder()
-                .id(UUID.randomUUID())
-                .name("Home Goods")
-                .key("homegoods")
-                .build());
-
-        UUID sportingGoods = save(Catalog.builder()
-                .id(UUID.randomUUID())
-                .name("Sporting Goods")
-                .key("sportinggoods")
-                .build());
-
-        UUID electronics = save(Catalog.builder()
-                .id(UUID.randomUUID())
-                .name("Electronics")
-                .key("electronics")
-                .build());
-
-        UUID clothes = save(Catalog.builder()
-                .id(UUID.randomUUID())
-                .name("Clothes")
-                .key("clothes")
-                .build());
-
-        save(Product.builder()
-                .id(UUID.randomUUID())
-                .catalogId(homeGoods)
-                .name("Coffee Mug")
-                .build());
-
-        save(Product.builder()
-                .id(UUID.randomUUID())
-                .catalogId(homeGoods)
-                .name("Toothpicks")
-                .build());
-
-        save(Product.builder()
-                .id(UUID.randomUUID())
-                .catalogId(homeGoods)
-                .name("Umbrella")
-                .build());
-
-        save(Product.builder()
-                .id(UUID.randomUUID())
-                .catalogId(sportingGoods)
-                .name("Basketball")
-                .build());
-
-        save(Product.builder()
-                .id(UUID.randomUUID())
-                .catalogId(sportingGoods)
-                .name("Balaclava")
-                .build());
-
-        save(Product.builder()
-                .id(UUID.randomUUID())
-                .catalogId(electronics)
-                .name("Apple iPad")
-                .build());
-
-        save(Product.builder()
-                .id(UUID.randomUUID())
-                .catalogId(electronics)
-                .name("Nintendo Switch")
-                .build());
-
-        save(Product.builder()
-                .id(UUID.randomUUID())
-                .catalogId(clothes)
-                .name("T-Shirt")
-                .build());
+        UUID homeGoods = save(CatalogFactory.create("Home Goods"));
+        UUID sportingGoods = save(CatalogFactory.create("Sporting Goods"));
+        UUID electronics = save(CatalogFactory.create("Electronics"));
+        UUID clothes = save(CatalogFactory.create("Clothes"));
+        save(ProductFactory.create(homeGoods, "Coffee Mug"));
+        save(ProductFactory.create(homeGoods, "Toothpicks"));
+        save(ProductFactory.create(homeGoods, "Umbrella"));
+        save(ProductFactory.create(sportingGoods, "Basketball"));
+        save(ProductFactory.create(sportingGoods, "Balaclava"));
+        save(ProductFactory.create(electronics, "Apple iPad"));
+        save(ProductFactory.create(electronics, "Nintendo Switch"));
+        save(ProductFactory.create(clothes, "T-Shirt"));
     }
 }

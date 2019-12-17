@@ -1,29 +1,29 @@
 import * as React from "react";
-import {useEffect, useLayoutEffect, useState} from "react";
-import {Product} from "../entities/Product";
+import {useEffect, useState} from "react";
+import {Product} from "../domain/product/Product";
 import {ProductCard} from "../components/ProductCard";
-import {ProductApi} from "../api/ProductApi";
 import {ProductFilters} from "../components/ProductFilters";
-import {Category} from "../entities/Category";
+import {Catalog} from "../domain/category/Catalog";
+import {Gateway} from "../domain/Gateway";
 import './Home.css';
 
 interface Props {
-  products: Product[],
-  categories: Category[],
-  productApi: ProductApi,
+  gateway: Gateway,
+  categories: Catalog[],
 }
 
-export const Home: React.FC<Props> = ({products, categories, productApi}) => {
-  const catalog = categories && categories[0] && categories[0].catalog || '';
-  const [activeCategory, setActiveCategory] = useState(catalog);
-  const [currentProducts, setCurrentProducts] = useState(products);
+export const Home: React.FC<Props> = ({categories, gateway}) => {
+  const {productApi} = gateway;
+  const catalog = (categories && categories[0] && categories[0].catalogKey) || '';
+  const [activeCategory, setActiveCategory] = useState<string>(catalog);
+  const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     productApi.getProducts(activeCategory)
       .then(newProducts => {
         setCurrentProducts(newProducts);
       });
-  }, [activeCategory]);
+  }, [productApi, activeCategory]);
 
   return (
     <main>
@@ -38,12 +38,7 @@ export const Home: React.FC<Props> = ({products, categories, productApi}) => {
       )}
 
       <section className="product-catalog">
-        {currentProducts.map((product: Product) =>
-          <ProductCard
-            key={`${product.name}-${product.price}`}
-            product={product}
-          />
-        )}
+        {currentProducts.map((product: Product, i) => <ProductCard key={i} product={product}/>)}
       </section>
     </main>
   );

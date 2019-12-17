@@ -10,6 +10,10 @@ import java.util.UUID;
 public
 class Product {
     private UUID id;
-    private String name;
     private UUID catalogId;
+    private String name;
+    private String price;
+    private String description;
+    private String imageSrc;
+    private String imageAlt;
 }

@@ -1,7 +1,7 @@
 import { waitForElement } from "@testing-library/dom";
 import { act, cleanup, render, RenderResult } from "@testing-library/react";
 import * as React from "react";
-import {Category} from "../entities/Category";
+import {Catalog, CatalogModel} from "../domain/category/Catalog";
 import {ProductFilters} from "./ProductFilters";
 
 describe("ProductFilters", () => {
@@ -10,9 +10,9 @@ describe("ProductFilters", () => {
 
   beforeEach(async () => {
     setFilterCategorySpy = jest.fn();
-    const filterCategories: Category[] = [
-      new Category("homegoods", "Home Goods"),
-      new Category("sportinggoods", "Sporting Goods")
+    const filterCategories: Catalog[] = [
+      new CatalogModel("homegoods", "Home Goods"),
+      new CatalogModel("sportinggoods", "Sporting Goods")
     ];
 
     await act(async () => {

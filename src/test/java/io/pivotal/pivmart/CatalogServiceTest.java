@@ -28,7 +28,7 @@ class CatalogServiceTest {
     @Test
     void getAll() {
         List<Catalog> expectedCatalog = asList(Catalog.builder()
-                .name(RandomString.make())
+                .displayName(RandomString.make())
                 .build());
 
         when(catalogRepository.findAll())

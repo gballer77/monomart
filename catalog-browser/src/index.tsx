@@ -2,20 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import CategoryApi from "./api/CategoryApi";
-import {ProductApi} from "./api/ProductApi";
-import {Product} from "./entities/Product";
-import {Category} from "./entities/Category";
 import {Home} from "./pages/Home";
+import {Gateway} from "./domain/Gateway";
 
-async function init(): Promise<{ categories: Category[], products: Product[] }> {
-  const categories = await CategoryApi.getCategories();
-  const products = await ProductApi.getProducts(categories[0].catalog);
-  return {categories, products};
-}
-
-init().then(({categories, products}) => {
-  ReactDOM.render(<Home categories={categories} products={products}/>, document.getElementById('root'));
+const gateway = new Gateway();
+gateway.init().then(categories => {
+  ReactDOM.render(<Home gateway={gateway} categories={categories}/>, document.getElementById('root'));
 });
 
 

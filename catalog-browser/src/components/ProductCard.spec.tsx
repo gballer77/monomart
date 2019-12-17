@@ -1,13 +1,13 @@
 import {render} from "@testing-library/react";
 import * as React from "react";
 import {ProductCard} from "./ProductCard";
-import {ProductModel} from "../entities/Product";
+import {ProductModel} from "../domain/product/Product";
 
 describe("ProductCard", () => {
   it("should render with a item name, price, description, and image for a product", () => {
     const product = new ProductModel(
       "Fake name",
-      19.99,
+      '19.99',
       "A fake description",
       "http://fakeimagelink",
       "Fake image alt text"

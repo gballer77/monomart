@@ -1,7 +1,7 @@
-import {Category} from "../entities/Category";
+import {Catalog} from "./Catalog";
 
 class CategoryApi {
-  static async getCategories(): Promise<Category[]> {
+  async getCategories(): Promise<Catalog[]> {
     return fetch('/api/catalogs')
         .then(response => response.json());
   }

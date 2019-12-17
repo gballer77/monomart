@@ -9,6 +9,6 @@ import java.util.UUID;
 @Builder
 public class Catalog {
     private UUID id;
-    private String name;
-    private String key;
+    private String catalogKey;
+    private String displayName;
 }
