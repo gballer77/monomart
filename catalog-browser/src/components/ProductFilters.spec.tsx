@@ -36,10 +36,10 @@ describe("ProductFilters", () => {
   });
 
   it("should notify the parent that a filter has been selected", () => {
-    const homeGoodsFilterButton = renderResult.getByText("Home Goods");
+    const homeGoodsFilterButton = renderResult.getByText("Sporting Goods");
     homeGoodsFilterButton.click();
 
     expect(setFilterCategorySpy).toHaveBeenCalledTimes(1);
-    expect(setFilterCategorySpy).toHaveBeenLastCalledWith("homegoods");
+    expect(setFilterCategorySpy).toHaveBeenLastCalledWith("sportinggoods");
   });
 });

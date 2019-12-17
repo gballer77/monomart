@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useEffect, useLayoutEffect, useState} from "react";
 import {Product} from "../entities/Product";
 import {ProductCard} from "../components/ProductCard";
 import {ProductApi} from "../api/ProductApi";
@@ -9,16 +9,17 @@ import './Home.css';
 
 interface Props {
   products: Product[],
-  categories: Category[]
+  categories: Category[],
+  productApi: ProductApi,
 }
 
-export const Home: React.FC<Props> = ({products, categories}) => {
+export const Home: React.FC<Props> = ({products, categories, productApi}) => {
   const catalog = categories && categories[0] && categories[0].catalog || '';
   const [activeCategory, setActiveCategory] = useState(catalog);
   const [currentProducts, setCurrentProducts] = useState(products);
 
   useEffect(() => {
-    ProductApi.getProducts(activeCategory)
+    productApi.getProducts(activeCategory)
       .then(newProducts => {
         setCurrentProducts(newProducts);
       });

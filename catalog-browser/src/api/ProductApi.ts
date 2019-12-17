@@ -5,4 +5,9 @@ export class ProductApi {
     return await fetch(`/api/catalogs/${category}`)
       .then(response => response.json());
   }
+
+  async getProducts(category: string): Promise<Product[]> {
+    return await fetch(`/api/catalogs/${category}`)
+        .then(response => response.json());
+  }
 }
