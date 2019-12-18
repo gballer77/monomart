@@ -1,26 +1,27 @@
-import {Home} from "../pages/Home";
+import {Home} from "./Home";
 import {cleanup, render, RenderResult} from "@testing-library/react";
 import * as React from "react";
 import {Product} from "../domain/product/Product";
-import {Catalog, CatalogModel} from "../domain/category/Catalog";
+import {Catalog, CatalogModel} from "../domain/catalog/Catalog";
 import {act} from "react-dom/test-utils";
 import {ProductApi} from "../domain/product/ProductApi";
 import {Gateway} from "../domain/Gateway";
+import {CartModel} from "../domain/cart/CartModel";
 
-describe("Index", () => {
+describe("Home", () => {
   afterEach(cleanup);
 
-  it("should render welcome dialogue", () => {
+  it("renders welcome dialogue", () => {
     const productApi = new ProductApi();
     productApi.getProducts = jest.fn().mockReturnValue(Promise.resolve([]));
     let home: RenderResult | null = null;
     act(() => {
       home = render(
-        <Home gateway={new Gateway({productApi})} categories={[]}/>
+        <Home cartModel={new CartModel()} gateway={new Gateway({productApi})} categories={[]}/>
       );
     });
 
-    expect(home!.container.innerHTML).toContain("Welcome to the Workshop Shop!");
+    expect(home!.container.innerHTML).toContain("Pivmart");
   });
 
   it("should render the passed in categories and products", async () => {
@@ -62,7 +63,7 @@ describe("Index", () => {
     let container: RenderResult | null = null;
     act(() => {
       container = render(
-        <Home gateway={new Gateway({productApi})} categories={categories}/>
+        <Home cartModel={new CartModel()} gateway={new Gateway({productApi})} categories={categories}/>
       );
     });
 
@@ -83,6 +84,7 @@ describe("Index", () => {
     act(() => {
       const {queryByText} = render(
         <Home
+          cartModel={new CartModel()}
           gateway={new Gateway({productApi})}
           categories={[]}
 

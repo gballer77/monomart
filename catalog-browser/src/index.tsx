@@ -4,10 +4,12 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {Home} from "./pages/Home";
 import {Gateway} from "./domain/Gateway";
+import {CartModel} from "./domain/cart/CartModel";
 
 const gateway = new Gateway();
+const cartModel = new CartModel();
 gateway.init().then(categories => {
-  ReactDOM.render(<Home gateway={gateway} categories={categories}/>, document.getElementById('root'));
+  ReactDOM.render(<Home gateway={gateway} categories={categories} cartModel={cartModel}/>, document.getElementById('root'));
 });
 
 

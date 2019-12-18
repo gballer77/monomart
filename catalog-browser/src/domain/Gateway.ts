@@ -1,22 +1,22 @@
 import {ProductApi} from "./product/ProductApi";
-import CategoryApi from "./category/CategoryApi";
-import {Catalog} from "./category/Catalog";
+import {CatalogApi} from "./catalog/CatalogApi";
+import {Catalog} from "./catalog/Catalog";
 
 export class Gateway {
-  readonly categoryApi: CategoryApi;
+  readonly catalogApi: CatalogApi;
   readonly productApi: ProductApi;
 
-  constructor(paramOverrides: Partial<{ categoryApi: CategoryApi, productApi: ProductApi }> = {}) {
+  constructor(paramOverrides: Partial<{ catalogApi: CatalogApi, productApi: ProductApi }> = {}) {
     const params = Object.assign({
-      categoryApi: new CategoryApi(),
+      catalogApi: new CatalogApi(),
       productApi: new ProductApi()
     }, paramOverrides);
 
-    this.categoryApi = params.categoryApi;
+    this.catalogApi = params.catalogApi;
     this.productApi = params.productApi;
   }
 
   init(): Promise<Catalog[]> {
-    return this.categoryApi.getCategories();
+    return this.catalogApi.getCategories();
   }
 }

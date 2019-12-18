@@ -1,7 +1,7 @@
 import { waitForElement } from "@testing-library/dom";
 import { act, cleanup, render, RenderResult } from "@testing-library/react";
 import * as React from "react";
-import {Catalog, CatalogModel} from "../domain/category/Catalog";
+import {Catalog, CatalogModel} from "../domain/catalog/Catalog";
 import {ProductFilters} from "./ProductFilters";
 
 describe("ProductFilters", () => {

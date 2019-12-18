@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Catalog} from "../domain/category/Catalog";
+import {Catalog} from "../domain/catalog/Catalog";
 import {Dispatch} from "react";
 import {SetStateAction} from "react";
 import './ProductFilters.css'
@@ -12,11 +12,6 @@ interface Props {
 
 export const ProductFilters = (props: Props) => {
   const {filterCategories, activeCategory, setActiveFilterCategory} = props;
-
-  // const filterClickHandler = (categoryId: string) => () => {
-  //     console.log('was clicked', categoryId);
-  //     setActiveFilterCategory(categoryId);
-  // };
 
   return (
     <div className="filters">

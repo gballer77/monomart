@@ -3,18 +3,23 @@ import {useEffect, useState} from "react";
 import {Product} from "../domain/product/Product";
 import {ProductCard} from "../components/ProductCard";
 import {ProductFilters} from "../components/ProductFilters";
-import {Catalog} from "../domain/category/Catalog";
+import {Catalog} from "../domain/catalog/Catalog";
 import {Gateway} from "../domain/Gateway";
 import './Home.css';
+import {ShoppingCart} from "../components/ShoppingCart";
+import {CartModel} from "../domain/cart/CartModel";
+import {getDefaultCatalog} from "../domain/catalog/CatalogApi";
+import {useCartModel} from "../domain/cart/useCartModel";
 
 interface Props {
   gateway: Gateway,
   categories: Catalog[],
+  cartModel: CartModel,
 }
 
-export const Home: React.FC<Props> = ({categories, gateway}) => {
+export const Home: React.FC<Props> = ({categories, gateway, cartModel}) => {
   const {productApi} = gateway;
-  const catalog = (categories && categories[0] && categories[0].catalogKey) || '';
+  const catalog = getDefaultCatalog(categories);
   const [activeCategory, setActiveCategory] = useState<string>(catalog);
   const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
 
@@ -25,9 +30,15 @@ export const Home: React.FC<Props> = ({categories, gateway}) => {
       });
   }, [productApi, activeCategory]);
 
+  useCartModel(cartModel);
+
   return (
     <main>
-      <h1 className={"title"}>Welcome to the Workshop Shop!</h1>
+      <ShoppingCart cartModel={cartModel}/>
+
+      <header>
+        <h1 className={"title"}>Pivmart</h1>
+      </header>
 
       {categories.length > 0 && (
         <ProductFilters
@@ -38,7 +49,14 @@ export const Home: React.FC<Props> = ({categories, gateway}) => {
       )}
 
       <section className="product-catalog">
-        {currentProducts.map((product: Product, i) => <ProductCard key={i} product={product}/>)}
+        {currentProducts.map((product: Product, i) =>
+          <ProductCard
+            addToCart={(p) => {
+              cartModel.addItem(p);
+            }}
+            key={i}
+            product={product}/>
+        )}
       </section>
     </main>
   );
