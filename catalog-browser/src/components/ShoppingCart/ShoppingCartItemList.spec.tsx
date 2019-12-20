@@ -4,12 +4,15 @@ import {cartTotal, ShoppingCartItemList, stringPriceToInt} from "./ShoppingCartI
 import {CartModel} from "../../domain/cart/CartModel";
 import {Product} from "../../domain/product/Product";
 import {CartItem} from "../../domain/cart/CartItem";
+import {mockFetch} from "../../domain/mockFetch";
 
 function makeProduct(name: string = '', price: string = '19.99') {
   return {name, price} as Product;
 }
 
 describe('ShoppingCartItemList', () => {
+  beforeEach(mockFetch);
+
   it('displays a list of items', () => {
     const cartModel = new CartModel();
     cartModel.addItem(makeProduct('foo'));
@@ -81,7 +84,6 @@ function makeCartItem(product: Product): CartItem {
 }
 
 test('cartTotal', () => {
-
   const total = cartTotal([
     makeCartItem(makeProduct('', '1.43')),
     makeCartItem(makeProduct('', '2.15'))

@@ -1,6 +1,7 @@
 import {CartModel} from "./CartModel";
 import {Product} from "../product/Product";
 import {CartApi} from "./CartApi";
+import {CartItem} from "./CartItem";
 
 describe('CartModel', () => {
   let cartModel: CartModel;
@@ -19,7 +20,7 @@ describe('CartModel', () => {
 
   test('getItems', () => {
     // @ts-ignore
-    cartModel.items = [{name: 'foo'} as Product];
+    cartModel.items = [{product: {name: 'foo'} as Product} as CartItem];
 
     expect(cartModel.getItems()[0].product.name).toEqual('foo');
   });

@@ -39,8 +39,7 @@ export class CartModel {
   removeItem(index: number) {
     const cartItems = this.items.splice(index, 1);
     if (cartItems.length > 0) {
-      this.cartApi.remove(cartItems[0].id)
-        .catch(e => console.error(e));
+      this.cartApi.remove(cartItems[0].id);
     }
 
     this.updateListeners();
