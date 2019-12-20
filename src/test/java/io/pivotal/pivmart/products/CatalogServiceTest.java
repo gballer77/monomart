@@ -1,8 +1,8 @@
-package io.pivotal.pivmart;
+package io.pivotal.pivmart.products;
 
-import io.pivotal.pivmart.catalog.Catalog;
-import io.pivotal.pivmart.catalog.CatalogRepository;
-import io.pivotal.pivmart.catalog.CatalogService;
+import io.pivotal.pivmart.products.Catalog;
+import io.pivotal.pivmart.products.CatalogRepository;
+import io.pivotal.pivmart.products.CatalogService;
 import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

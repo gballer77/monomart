@@ -1,28 +1,54 @@
 import {Product} from "../product/Product";
 import {Dispatch, SetStateAction} from "react";
+import {CartApi} from "./CartApi";
+import {CartItem} from "./CartItem";
 
 type Subscription = Dispatch<SetStateAction<string>>
 
 export class CartModel {
+  constructor(private cartApi: CartApi = new CartApi()) {
+  }
+
   private listeners: Subscription[] = [];
-  private items: Product[] = [];
+  private items: CartItem[] = [];
+
+  init() {
+    this.cartApi.list()
+      .then(cart => {
+        this.items = cart;
+        this.updateListeners();
+      });
+  }
 
   getItems() {
     return this.items;
   }
 
   addItem(product: Product) {
-    this.items.push(product);
+    const temporaryId = new Date().toISOString();
+    this.items.push({product, id: temporaryId});
+    this.cartApi.add(product)
+      .then(cartItem => {
+        const index = this.items.findIndex(item => item.id === temporaryId);
+        this.items[index] = cartItem;
+      });
+
     this.updateListeners();
   }
 
   removeItem(index: number) {
-    this.items.splice(index, 1);
+    const cartItems = this.items.splice(index, 1);
+    if (cartItems.length > 0) {
+      this.cartApi.remove(cartItems[0].id)
+        .catch(e => console.error(e));
+    }
+
     this.updateListeners();
   }
 
   checkOut() {
     this.items = [];
+    this.cartApi.checkOut();
     this.updateListeners();
   }
 

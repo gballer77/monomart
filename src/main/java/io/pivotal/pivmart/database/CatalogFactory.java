@@ -1,6 +1,6 @@
-package io.pivotal.pivmart.product;
+package io.pivotal.pivmart.database;
 
-import io.pivotal.pivmart.catalog.Catalog;
+import io.pivotal.pivmart.products.Catalog;
 
 import java.util.UUID;
 

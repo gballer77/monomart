@@ -1,8 +1,8 @@
-package io.pivotal.pivmart;
+package io.pivotal.pivmart.products;
 
-import io.pivotal.pivmart.catalog.Catalog;
-import io.pivotal.pivmart.catalog.CatalogRestController;
-import io.pivotal.pivmart.catalog.CatalogService;
+import io.pivotal.pivmart.products.Catalog;
+import io.pivotal.pivmart.products.CatalogRestController;
+import io.pivotal.pivmart.products.CatalogService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,13 +32,14 @@ class CatalogRestControllerTest {
 
     @Test
     void list_returnsCatalogs() throws Exception {
-
         when(catalogService.getAll()).thenReturn(asList(Catalog.builder().build()));
 
         mockMvc.perform(get("/api/catalogs"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", Matchers.greaterThanOrEqualTo(1)))
-                .andExpect(jsonPath("$[0]", hasKey("name")))
+                .andExpect(jsonPath("$[0]", hasKey("id")))
+                .andExpect(jsonPath("$[0]", hasKey("catalogKey")))
+                .andExpect(jsonPath("$[0]", hasKey("displayName")))
         ;
 
         verify(catalogService).getAll();

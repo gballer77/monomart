@@ -13,10 +13,8 @@ interface Props {
 const TestComponent: React.FC<Props> = ({cartModel, renderSpy}) => {
   renderSpy();
   const cart = useCartModel(cartModel);
-  return <ul>{cart.map(i => <li>{i.name}</li>)}</ul>
+  return <ul>{cart.map(i => <li>{i.product.name}</li>)}</ul>
 };
-
-// Unsubscribe
 
 describe('useCartModel', () => {
   it('rerenders when cart updates subscribers', () => {

@@ -3,6 +3,7 @@ import {render} from "@testing-library/react";
 import {cartTotal, ShoppingCartItemList, stringPriceToInt} from "./ShoppingCartItemList";
 import {CartModel} from "../../domain/cart/CartModel";
 import {Product} from "../../domain/product/Product";
+import {CartItem} from "../../domain/cart/CartItem";
 
 function makeProduct(name: string = '', price: string = '19.99') {
   return {name, price} as Product;
@@ -72,8 +73,19 @@ test('stringPriceToInt', () => {
   expect(stringPriceToInt('11.97')).toEqual(1197);
 });
 
+function makeCartItem(product: Product): CartItem {
+  return {
+    product,
+    id: '',
+  }
+}
+
 test('cartTotal', () => {
-  const total = cartTotal([makeProduct('', '1.43'), makeProduct('', '2.15')]);
+
+  const total = cartTotal([
+    makeCartItem(makeProduct('', '1.43')),
+    makeCartItem(makeProduct('', '2.15'))
+  ]);
 
   expect(total).toEqual('3.58');
 });

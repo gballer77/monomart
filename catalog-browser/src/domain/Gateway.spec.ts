@@ -1,6 +1,7 @@
 import {Gateway} from "./Gateway";
 import {ProductApi} from "./product/ProductApi";
 import {CatalogApi} from "./catalog/CatalogApi";
+import {CartApi} from "./cart/CartApi";
 
 describe('Gateway', () => {
   test('constructor - allows optional override of apis', () => {
@@ -12,12 +13,13 @@ describe('Gateway', () => {
     expect(productApi.getProducts).toHaveBeenCalled();
   });
 
-  test('init', () => {
+  test('init', async () => {
     const catalogApi = new CatalogApi();
     catalogApi.getCategories = jest.fn();
+
     const gateway = new Gateway({catalogApi});
 
-    gateway.init();
+    await gateway.init();
 
     expect(catalogApi.getCategories).toHaveBeenCalled();
   });

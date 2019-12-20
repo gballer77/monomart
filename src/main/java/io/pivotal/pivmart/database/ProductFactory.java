@@ -1,4 +1,6 @@
-package io.pivotal.pivmart.product;
+package io.pivotal.pivmart.database;
+
+import io.pivotal.pivmart.products.Product;
 
 import java.util.Random;
 import java.util.UUID;

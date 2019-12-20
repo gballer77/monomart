@@ -1,19 +1,18 @@
 package io.pivotal.pivmart.database;
 
-import io.pivotal.pivmart.catalog.Catalog;
-import io.pivotal.pivmart.product.CatalogFactory;
-import io.pivotal.pivmart.product.Product;
-import io.pivotal.pivmart.product.ProductFactory;
+import io.pivotal.pivmart.products.Catalog;
+import io.pivotal.pivmart.products.Product;
+import io.pivotal.pivmart.purchases.Purchase;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class StaticDatabase {
     private Map<UUID, Catalog> catalogs = new HashMap<>();
     private Map<UUID, Product> products = new HashMap<>();
+    private Map<UUID, CartItem> cart = new HashMap<>();
+    private Map<UUID, Purchase> purchases = new HashMap<>();
 
     public StaticDatabase() {
         seed();
@@ -27,6 +26,14 @@ public class StaticDatabase {
         return products;
     }
 
+    public Map<UUID, CartItem> getCart() {
+        return cart;
+    }
+
+    public Map<UUID, Purchase> getPurchases() {
+        return purchases;
+    }
+
     private UUID save(Catalog catalog) {
         catalogs.put(catalog.getId(), catalog);
 
@@ -35,6 +42,30 @@ public class StaticDatabase {
 
     private void save(Product product) {
         products.put(product.getId(), product);
+    }
+
+    public CartItem save(CartItem cartItem) {
+        UUID uuid = UUID.randomUUID();
+        cartItem.setId(uuid);
+        cart.put(uuid, cartItem);
+
+        return cartItem;
+    }
+
+    public void remove(CartItem cartItem) {
+        cart.remove(cartItem.getId());
+    }
+
+    public void emptyCart() {
+        cart.clear();
+    }
+
+    public Purchase save(Purchase purchase) {
+        UUID uuid = UUID.randomUUID();
+        purchase.setId(uuid);
+        purchases.put(uuid, purchase);
+
+        return purchase;
     }
 
     public void seed() {
@@ -50,5 +81,6 @@ public class StaticDatabase {
         save(ProductFactory.create(electronics, "Apple iPad"));
         save(ProductFactory.create(electronics, "Nintendo Switch"));
         save(ProductFactory.create(clothes, "T-Shirt"));
+
     }
 }

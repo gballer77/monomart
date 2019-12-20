@@ -1,6 +1,4 @@
-package io.pivotal.pivmart.product;
-
-import io.pivotal.pivmart.catalog.Catalog;
+package io.pivotal.pivmart.products;
 
 import java.util.List;
 

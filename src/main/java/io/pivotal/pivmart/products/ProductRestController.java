@@ -1,4 +1,4 @@
-package io.pivotal.pivmart.product;
+package io.pivotal.pivmart.products;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

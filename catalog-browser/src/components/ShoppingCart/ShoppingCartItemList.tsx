@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Dispatch, SetStateAction} from "react";
 import {CartModel} from "../../domain/cart/CartModel";
-import {Product} from "../../domain/product/Product";
+import {CartItem} from "../../domain/cart/CartItem";
 
 interface Props {
   cartModel: CartModel
@@ -12,8 +12,8 @@ export function stringPriceToInt(amount: string): number {
   return parseInt(amount.replace('.', ''));
 }
 
-export function cartTotal(cart: Product[]) {
-  const totalWithoutCents = cart.map(item => item.price)
+export function cartTotal(cart: CartItem[]) {
+  const totalWithoutCents = cart.map(item => item.product.price)
     .reduce((accumulator, amount) => accumulator + stringPriceToInt(amount), 0);
 
   const totalWithCents = totalWithoutCents / 100;
@@ -30,7 +30,7 @@ export const ShoppingCartItemList: React.FC<Props> = ({cartModel, updateShowCart
       <h2>Cart</h2>
     </header>
     <ul>
-      {cartModel.getItems().map((product, i) =>
+      {cartModel.getItems().map(({product}, i) =>
         <li key={i}>
           {product.name} ({product.price}) <button className={'remove-item'}
                                                    onClick={() => cartModel.removeItem(i)}>&times;</button>
