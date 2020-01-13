@@ -1,6 +1,6 @@
-package io.pivotal.pivmart.cart;
+package io.pivotal.pivmart.repositories;
 
-import io.pivotal.pivmart.database.CartItem;
+import io.pivotal.pivmart.models.CartItem;
 
 import java.util.List;
 import java.util.UUID;

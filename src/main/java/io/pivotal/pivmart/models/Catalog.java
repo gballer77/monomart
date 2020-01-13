@@ -1,4 +1,4 @@
-package io.pivotal.pivmart.products;
+package io.pivotal.pivmart.models;
 
 import lombok.Builder;
 import lombok.Data;

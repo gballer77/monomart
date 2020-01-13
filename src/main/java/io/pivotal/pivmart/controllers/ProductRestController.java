@@ -1,5 +1,7 @@
-package io.pivotal.pivmart.products;
+package io.pivotal.pivmart.controllers;
 
+import io.pivotal.pivmart.models.Product;
+import io.pivotal.pivmart.services.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

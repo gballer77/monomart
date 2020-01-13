@@ -1,6 +1,6 @@
-package io.pivotal.pivmart.database;
+package io.pivotal.pivmart.models;
 
-import io.pivotal.pivmart.products.Product;
+import io.pivotal.pivmart.models.Product;
 import lombok.Builder;
 import lombok.Data;
 

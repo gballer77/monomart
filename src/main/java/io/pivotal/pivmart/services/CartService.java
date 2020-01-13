@@ -1,7 +1,9 @@
-package io.pivotal.pivmart.cart;
+package io.pivotal.pivmart.services;
 
-import io.pivotal.pivmart.database.CartItem;
-import io.pivotal.pivmart.products.Product;
+import io.pivotal.pivmart.events.CartPublisher;
+import io.pivotal.pivmart.models.CartItem;
+import io.pivotal.pivmart.repositories.CartRepository;
+import io.pivotal.pivmart.models.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

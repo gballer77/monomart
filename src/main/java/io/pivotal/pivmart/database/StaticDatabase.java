@@ -1,8 +1,9 @@
 package io.pivotal.pivmart.database;
 
-import io.pivotal.pivmart.products.Catalog;
-import io.pivotal.pivmart.products.Product;
-import io.pivotal.pivmart.purchases.Purchase;
+import io.pivotal.pivmart.models.CartItem;
+import io.pivotal.pivmart.models.Catalog;
+import io.pivotal.pivmart.models.Product;
+import io.pivotal.pivmart.models.Purchase;
 import org.springframework.stereotype.Component;
 
 import java.util.*;

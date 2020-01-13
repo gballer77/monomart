@@ -1,4 +1,6 @@
-package io.pivotal.pivmart.products;
+package io.pivotal.pivmart.repositories;
+
+import io.pivotal.pivmart.models.Catalog;
 
 import java.util.List;
 

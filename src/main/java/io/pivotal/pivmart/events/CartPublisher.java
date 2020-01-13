@@ -1,7 +1,6 @@
-package io.pivotal.pivmart.cart;
+package io.pivotal.pivmart.events;
 
-import io.pivotal.pivmart.database.CartItem;
-import io.pivotal.pivmart.purchases.CheckoutEvent;
+import io.pivotal.pivmart.models.CartItem;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
