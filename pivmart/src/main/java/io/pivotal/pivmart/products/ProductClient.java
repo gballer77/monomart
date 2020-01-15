@@ -1,5 +1,6 @@
 package io.pivotal.pivmart.products;
 
+import io.pivotal.pivmart.config.ProductApiProperties;
 import io.pivotal.pivmart.models.Catalog;
 import io.pivotal.pivmart.models.Product;
 import io.pivotal.pivmart.repositories.ProductRepository;
@@ -15,15 +16,17 @@ import java.util.List;
 @Component
 public class ProductClient implements ProductRepository {
     private RestTemplate restTemplate;
+    private ProductApiProperties productApiProperties;
 
-    public ProductClient(RestTemplate restTemplate) {
+    public ProductClient(RestTemplate restTemplate, ProductApiProperties productApiProperties) {
         this.restTemplate = restTemplate;
+        this.productApiProperties = productApiProperties;
     }
 
     @Override
     public List<Product> findAll() {
         ResponseEntity<List<Product>> response = restTemplate.exchange(
-                URI.create("http://localhost:8081/"),
+                URI.create(productApiProperties.getUrl()),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Product>>() {}
@@ -34,7 +37,7 @@ public class ProductClient implements ProductRepository {
 
     @Override
     public List<Product> findAllByCatalog(Catalog catalog) {
-        URI url = URI.create("http://localhost:8081/?catalog=" + catalog.getCatalogKey());
+        URI url = URI.create(productApiProperties.getUrl() + "?catalog=" + catalog.getCatalogKey());
 
         ResponseEntity<List<Product>> response = restTemplate.exchange(
                 url,

@@ -13,8 +13,4 @@ public class PivmartApplication {
 		SpringApplication.run(PivmartApplication.class, args);
 	}
 
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
-		return restTemplateBuilder.build();
-	}
 }
