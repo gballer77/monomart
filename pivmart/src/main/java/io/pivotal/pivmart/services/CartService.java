@@ -32,7 +32,9 @@ public class CartService {
 
     public void remove(UUID cartItemId) {
         CartItem cartItem = cartRepository.find(cartItemId);
-        cartRepository.remove(cartItem);
+        if (cartItem != null) {
+            cartRepository.remove(cartItem);
+        }
     }
 
     public void checkOut() {
