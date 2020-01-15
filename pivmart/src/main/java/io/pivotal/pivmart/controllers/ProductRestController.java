@@ -21,7 +21,7 @@ public class ProductRestController {
 
     @GetMapping
     public List<Product> list(@RequestParam(value = "catalog", required = false) String catalogKey) {
-        if(catalogKey == null) {
+        if (catalogKey == null) {
             return productService.getAll();
         }
 
