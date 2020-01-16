@@ -16,6 +16,9 @@
     "react-scripts": "3.3.0",
     "typescript": "~3.7.2"
   },
+  "resolutions": {
+    "serialize-javascript": "^2.1.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && rm -r ../src/main/resources/static && cp -r build ../src/main/resources/static",
