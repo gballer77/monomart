@@ -1,5 +1,7 @@
+import org.springframework.cloud.contract.verifier.config.TestFramework
+
 plugins {
-    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'org.springframework.boot' version '2.2.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
     id 'org.springframework.cloud.contract' version '2.2.1.RELEASE'
@@ -8,10 +10,6 @@ plugins {
 group = 'io.pivotal'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
-
-ext {
-    set('springCloudVersion', "Hoxton.SR1")
-}
 
 configurations {
     compileOnly {
@@ -23,15 +21,23 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "Hoxton.SR1")
+}
+
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
+
 }
 
 dependencyManagement {
@@ -41,8 +47,8 @@ dependencyManagement {
 }
 
 contracts {
-    testFramework = org.springframework.cloud.contract.verifier.config.TestFramework.JUNIT5
-    basePackageForTests = 'io.pivotal.productapi.contracts'
+    testFramework = TestFramework.JUNIT5
+    packageWithBaseClasses = 'io.pivotal.productapi.contracts'
 //	baseClassMappings {
 //		baseClassMapping(".*intoxication.*", "io.pivotal.intoxication.BeerIntoxicationBase")
 //	}
