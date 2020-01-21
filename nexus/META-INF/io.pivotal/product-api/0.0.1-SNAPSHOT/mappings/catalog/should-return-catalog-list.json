@@ -1,0 +1,21 @@
+{
+  "id" : "e366aabd-b23f-48c3-84da-69207e5e2287",
+  "request" : {
+    "url" : "/catalogs",
+    "method" : "GET",
+    "headers" : {
+      "Accept" : {
+        "equalTo" : "application/json"
+      }
+    }
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "[{\"catalogKey\":\"clothes\",\"displayName\":\"Clothes\",\"id\":\"f94ac11b-a492-4706-aa66-7f7fd47c23a4\"},{\"catalogKey\":\"electronics\",\"displayName\":\"Electronics\",\"id\":\"c882752b-6e81-4a13-bca5-cdb3fa04cecc\"},{\"catalogKey\":\"sportinggoods\",\"displayName\":\"Sporting Goods\",\"id\":\"1b607030-46a3-459d-afed-ed7694a518d7\"},{\"catalogKey\":\"homegoods\",\"displayName\":\"Home Goods\",\"id\":\"de7c7810-e120-4660-9b06-a414055ce28d\"}]",
+    "headers" : {
+      "Content-Type" : "application/json"
+    },
+    "transformers" : [ "response-template" ]
+  },
+  "uuid" : "e366aabd-b23f-48c3-84da-69207e5e2287"
+}

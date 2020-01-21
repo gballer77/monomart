@@ -1,11 +1,9 @@
 HELP.md
-/**/.gradle
-/**/build/
+.gradle
+build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-**/src/main/resources/static
-.DS_Store
 
 ### STS ###
 .apt_generated
@@ -32,3 +30,5 @@ out/
 
 ### VS Code ###
 .vscode/
+/.gradle/
+/build/

@@ -1,8 +1,8 @@
 import org.springframework.cloud.contract.verifier.config.TestFramework
 
 plugins {
-    id 'org.springframework.boot' version '2.2.3.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
     id 'org.springframework.cloud.contract' version '2.2.1.RELEASE'
 }
@@ -49,9 +49,7 @@ dependencyManagement {
 contracts {
     testFramework = TestFramework.JUNIT5
     packageWithBaseClasses = 'io.pivotal.productapi.contracts'
-//	baseClassMappings {
-//		baseClassMapping(".*intoxication.*", "io.pivotal.intoxication.BeerIntoxicationBase")
-//	}
+    stubsOutputDir = project.file("${project.buildDir}/../../nexus")
 }
 
 test {

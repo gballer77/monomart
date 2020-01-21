@@ -5,6 +5,8 @@ import io.pivotal.pivmart.models.Catalog;
 import io.pivotal.pivmart.repositories.CatalogRepository;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -25,10 +27,14 @@ public class CatalogClient implements CatalogRepository {
 
     @Override
     public List<Catalog> findAll() {
+
+        RequestEntity<Void> request = RequestEntity
+                .get(URI.create(productApiProperties.getUrl() + "/catalogs"))
+                .accept(MediaType.APPLICATION_JSON)
+                .build();
+
         ResponseEntity<List<Catalog>> response = restTemplate.exchange(
-                URI.create(productApiProperties.getUrl() + "catalogs/"),
-                HttpMethod.GET,
-                null,
+                request,
                 new ParameterizedTypeReference<List<Catalog>>() {}
         );
 

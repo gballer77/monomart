@@ -1,0 +1,6 @@
+logging.level:
+  com.netflix.eureka: OFF
+  com.netflix.discovery: OFF
+
+server:
+  port: 8761
