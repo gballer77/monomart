@@ -27,7 +27,10 @@ describe('CartApi', () => {
   });
 
   test('remove', async () => {
-    window.fetch = jest.fn().mockReturnValue(Promise.resolve({json: () => {}}));
+    window.fetch = jest.fn().mockReturnValue(Promise.resolve({
+      json: () => {
+      }
+    }));
 
     await cartApi.remove('');
 
@@ -35,7 +38,10 @@ describe('CartApi', () => {
   });
 
   test('checkOut', async () => {
-    window.fetch = jest.fn().mockReturnValue(Promise.resolve({json: () => {}}));
+    window.fetch = jest.fn().mockReturnValue(Promise.resolve({
+      json: () => {
+      }
+    }));
 
     await cartApi.checkOut();
 

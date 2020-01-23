@@ -2,8 +2,6 @@ import * as React from "react";
 import {CartModel} from "./CartModel";
 import {useCartModel} from "./useCartModel";
 import {render} from "@testing-library/react";
-import {Product} from "../product/Product";
-import {act} from "react-dom/test-utils";
 
 interface Props {
   cartModel: CartModel,

@@ -27,7 +27,6 @@ public class CatalogClient implements CatalogRepository {
 
     @Override
     public List<Catalog> findAll() {
-
         RequestEntity<Void> request = RequestEntity
                 .get(URI.create(productApiProperties.getUrl() + "/catalogs"))
                 .accept(MediaType.APPLICATION_JSON)
@@ -35,7 +34,8 @@ public class CatalogClient implements CatalogRepository {
 
         ResponseEntity<List<Catalog>> response = restTemplate.exchange(
                 request,
-                new ParameterizedTypeReference<List<Catalog>>() {}
+                new ParameterizedTypeReference<List<Catalog>>() {
+                }
         );
 
         return response.getBody();
@@ -47,7 +47,7 @@ public class CatalogClient implements CatalogRepository {
                 URI.create(productApiProperties.getUrl() + "catalogs/" + catalogKey),
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<Catalog>() {}
+                Catalog.class
         );
 
         return response.getBody();

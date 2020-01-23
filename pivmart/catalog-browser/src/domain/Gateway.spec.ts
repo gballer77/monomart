@@ -1,7 +1,6 @@
 import {Gateway} from "./Gateway";
 import {ProductApi} from "./product/ProductApi";
 import {CatalogApi} from "./catalog/CatalogApi";
-import {CartApi} from "./cart/CartApi";
 
 describe('Gateway', () => {
   test('constructor - allows optional override of apis', () => {

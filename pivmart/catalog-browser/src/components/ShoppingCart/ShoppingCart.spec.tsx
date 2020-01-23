@@ -2,7 +2,6 @@ import * as React from "react";
 import {render} from "@testing-library/react";
 import {ShoppingCart} from "./ShoppingCart";
 import {CartModel} from "../../domain/cart/CartModel";
-import {CartApi} from "../../domain/cart/CartApi";
 
 describe('ShoppingCart', () => {
   it('displays ShoppingCartSummary by default', () => {

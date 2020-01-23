@@ -1,8 +1,8 @@
 package io.pivotal.pivmart.services;
 
 import io.pivotal.pivmart.models.Catalog;
-import io.pivotal.pivmart.repositories.CatalogRepository;
 import io.pivotal.pivmart.models.Product;
+import io.pivotal.pivmart.repositories.CatalogRepository;
 import io.pivotal.pivmart.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 

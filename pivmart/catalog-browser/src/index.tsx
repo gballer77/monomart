@@ -10,7 +10,8 @@ const gateway = new Gateway();
 const cartModel = new CartModel(gateway.cartApi);
 cartModel.init();
 gateway.init().then(categories => {
-  ReactDOM.render(<Home gateway={gateway} categories={categories} cartModel={cartModel}/>, document.getElementById('root'));
+  ReactDOM.render(<Home gateway={gateway} categories={categories}
+                        cartModel={cartModel}/>, document.getElementById('root'));
 });
 
 

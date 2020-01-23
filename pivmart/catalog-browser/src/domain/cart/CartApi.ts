@@ -6,6 +6,7 @@ export class CartApi {
     return fetch('/api/cart')
       .then(response => response.json());
   }
+
   add(product: Product): Promise<CartItem> {
     return fetch('/api/cart', {
       method: 'POST',

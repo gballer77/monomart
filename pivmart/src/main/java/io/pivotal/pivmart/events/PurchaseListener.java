@@ -1,8 +1,8 @@
 package io.pivotal.pivmart.events;
 
-import io.pivotal.pivmart.repositories.CartRepository;
 import io.pivotal.pivmart.models.CartItem;
 import io.pivotal.pivmart.models.Purchase;
+import io.pivotal.pivmart.repositories.CartRepository;
 import io.pivotal.pivmart.repositories.PurchasesRepository;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;

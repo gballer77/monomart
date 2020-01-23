@@ -18,7 +18,7 @@ public class ProductEndpoint {
 
     @GetMapping("/")
     public List<Product> findAll(@RequestParam(value = "catalog", required = false) String catalogKey) {
-        if(catalogKey == null) {
+        if (catalogKey == null) {
             return productRepository.findAll();
         }
 

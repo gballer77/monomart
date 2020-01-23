@@ -1,8 +1,8 @@
 package io.pivotal.pivmart.controllers;
 
-import io.pivotal.pivmart.services.CartService;
 import io.pivotal.pivmart.models.CartItem;
 import io.pivotal.pivmart.models.Product;
+import io.pivotal.pivmart.services.CartService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

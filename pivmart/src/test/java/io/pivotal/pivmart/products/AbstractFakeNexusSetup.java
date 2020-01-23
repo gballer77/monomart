@@ -20,12 +20,11 @@ public abstract class AbstractFakeNexusSetup {
     protected static String repoRoot() {
         try {
             String userPath = System.getProperty("user.dir");
-            userPath = userPath.substring( 0, userPath.lastIndexOf('/'));
+            userPath = userPath.substring(0, userPath.lastIndexOf('/'));
             userPath += "/nexus";
             File dir = new File(userPath);
             return "stubs://file://" + dir.toString();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e);
             e.printStackTrace();
             return "";

@@ -1,7 +1,6 @@
 import * as React from "react";
+import {Dispatch, SetStateAction} from "react";
 import {Catalog} from "../domain/catalog/Catalog";
-import {Dispatch} from "react";
-import {SetStateAction} from "react";
 import './ProductFilters.css'
 
 interface Props {

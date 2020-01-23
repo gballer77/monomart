@@ -9,7 +9,7 @@ public class CatalogFactory {
         return Catalog.builder()
                 .id(UUID.randomUUID())
                 .displayName(name)
-                .catalogKey(name.toLowerCase().replaceAll("\\s+",""))
+                .catalogKey(name.toLowerCase().replaceAll("\\s+", ""))
                 .build();
     }
 }

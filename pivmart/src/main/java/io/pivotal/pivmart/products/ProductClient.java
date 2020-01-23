@@ -29,7 +29,8 @@ public class ProductClient implements ProductRepository {
                 URI.create(productApiProperties.getUrl()),
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<Product>>() {}
+                new ParameterizedTypeReference<List<Product>>() {
+                }
         );
 
         return response.getBody();
@@ -43,7 +44,8 @@ public class ProductClient implements ProductRepository {
                 url,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<Product>>() {}
+                new ParameterizedTypeReference<List<Product>>() {
+                }
         );
 
         return response.getBody();

@@ -1,12 +1,12 @@
 package io.pivotal.pivmart.database;
 
 import io.pivotal.pivmart.models.CartItem;
-import io.pivotal.pivmart.models.Catalog;
-import io.pivotal.pivmart.models.Product;
 import io.pivotal.pivmart.models.Purchase;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Component
 public class StaticDatabase {
