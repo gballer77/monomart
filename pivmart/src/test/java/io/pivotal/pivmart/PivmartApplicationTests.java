@@ -1,16 +1,23 @@
 package io.pivotal.pivmart;
 
+import io.pivotal.pivmart.models.Catalog;
+import io.pivotal.pivmart.models.Product;
+import io.pivotal.pivmart.services.CatalogService;
+import io.pivotal.pivmart.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import java.util.UUID;
 
+import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -24,12 +31,21 @@ class PivmartApplicationTests {
     @Autowired
     MockMvc mockMvc;
 
+    @MockBean
+    private ProductService mockProductService;
+
+    @MockBean
+    private CatalogService mockCatalogService;
+
     @Test
     void contextLoads() {
     }
 
     @Test
     void products_list() throws Exception {
+
+        when(this.mockProductService.getForCatalog("electronics")).thenReturn(singletonList(Product.builder().build()));
+
         mockMvc.perform(get("/api/products?catalog={catalog}", "electronics"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", greaterThan(0)))
@@ -41,6 +57,9 @@ class PivmartApplicationTests {
 
     @Test
     void catalogs_list() throws Exception {
+
+        when(this.mockCatalogService.getAll()).thenReturn(singletonList(Catalog.builder().build()));
+
         mockMvc.perform(get("/api/catalogs"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", greaterThanOrEqualTo(1)))
