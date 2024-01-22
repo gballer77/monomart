@@ -1,4 +1,3 @@
-import {waitForElement} from "@testing-library/dom";
 import {act, cleanup, render, RenderResult} from "@testing-library/react";
 import * as React from "react";
 import {Catalog, CatalogModel} from "../domain/catalog/Catalog";
@@ -25,7 +24,7 @@ describe("ProductFilters", () => {
       );
     });
 
-    await waitForElement(() => renderResult.getByText("Home Goods"));
+    await renderResult.getByText("Home Goods");
   });
 
   afterEach(cleanup);

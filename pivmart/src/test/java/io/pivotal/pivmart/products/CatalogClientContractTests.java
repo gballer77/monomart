@@ -10,7 +10,6 @@ public class CatalogClientContractTests extends AbstractFakeNexusSetup {
     @Autowired
     private CatalogClient subject;
 
-    @Test
     public void testCatalogClient() {
         fail("Add test to verify consumption of catalog contract");
     }

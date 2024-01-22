@@ -3,7 +3,6 @@ package io.pivotal.pivmart;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -22,7 +21,6 @@ public class PivmartApplication {
 	public static class Cloud {
 
 		@Bean
-		@LoadBalanced
 		@Primary
 		public RestTemplate loadBalancedRestTemplate(RestTemplateBuilder builder) {
 

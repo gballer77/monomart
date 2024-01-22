@@ -1,12 +1,12 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.4.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'org.springframework.boot' version '2.7.18'
+    id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
 }
 
 group = 'io.pivotal'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '17'
 
 configurations {
     compileOnly {
@@ -23,11 +23,10 @@ ext {
 }
 
 dependencies {
-
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -36,7 +35,6 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
-
 }
 
 dependencyManagement {
@@ -47,4 +45,62 @@ dependencyManagement {
 
 test {
     useJUnitPlatform()
+}
+
+tasks.register('installFrontend', Exec) {
+    dependsOn cleanFrontend
+    inputs.file("frontend/yarn.lock")
+    inputs.file("frontend/package.json")
+    outputs.dir("frontend/node_modules")
+
+    workingDir "frontend"
+    executable "yarn"
+    args "install", "--update-checksums"
+}
+
+tasks.register('buildFrontend', Exec) {
+    dependsOn installFrontend
+    inputs.files(file("frontend").listFiles((file -> file.name != "out") as FileFilter))
+    outputs.dir("frontend/build")
+
+    workingDir "frontend"
+    executable "yarn"
+    args "build"
+}
+
+tasks.register('copyFrontend', Copy) {
+    from buildFrontend.outputs
+    into "$buildDir/resources/main/static"
+    doLast {
+        println "copied frontend artifacts to $buildDir/resources/main/static"
+    }
+}
+
+tasks.register('cleanFrontend', Delete) {
+    delete "frontend/out", "frontend/.next", "$buildDir/resources/main/static"
+    doLast {
+        println "deleted frontend artifacts"
+    }
+}
+
+// region configure Spring's build dependency chain
+jar {
+    dependsOn copyFrontend
+}
+
+// endregion
+bootJar {
+    dependsOn copyFrontend
+}
+
+build {
+    dependsOn copyFrontend
+}
+
+bootRun {
+    dependsOn copyFrontend
+}
+
+clean {
+    dependsOn cleanFrontend
 }

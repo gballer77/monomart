@@ -28,7 +28,7 @@ public class CatalogClient implements CatalogRepository {
     @Override
     public List<Catalog> findAll() {
         RequestEntity<Void> request = RequestEntity
-                .get(URI.create(productApiProperties.getUrl() + "/catalogs"))
+                .get(URI.create(productApiProperties.getUrl() + "catalogs"))
                 .accept(MediaType.APPLICATION_JSON)
                 .build();
 

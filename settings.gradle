@@ -1,0 +1,3 @@
+rootProject.name = 'pivmart-root'
+include 'pivmart'
+include 'product-api'
