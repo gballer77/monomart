@@ -7,6 +7,7 @@ import io.pivotal.pivmart.repositories.CartRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -31,10 +32,8 @@ public class CartService {
     }
 
     public void remove(UUID cartItemId) {
-        CartItem cartItem = cartRepository.find(cartItemId);
-        if (cartItem != null) {
-            cartRepository.remove(cartItem);
-        }
+        Optional<CartItem> cartItem = cartRepository.findById(cartItemId);
+        cartItem.ifPresent(item -> cartRepository.delete(item));
     }
 
     public void checkOut() {

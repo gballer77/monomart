@@ -28,6 +28,6 @@ public class PurchaseListener {
 
         purchasesRepository.save(purchase);
 
-        cartRepository.removeAll();
+        cartRepository.deleteAll();
     }
 }
