@@ -37,7 +37,7 @@ export const Home: React.FC<Props> = ({categories, gateway, cartModel}) => {
       <ShoppingCart cartModel={cartModel}/>
 
       <header>
-        <h1 className={"title"}>Pivmart</h1>
+        <h1 className={"title"}>Monomart</h1>
       </header>
 
       {categories.length > 0 && (

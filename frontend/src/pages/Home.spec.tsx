@@ -21,7 +21,7 @@ describe("Home", () => {
       );
     });
 
-    expect(home!.container.innerHTML).toContain("Pivmart");
+    expect(home!.container.innerHTML).toContain("Monomart");
   });
 
   it("should render the passed in categories and products", async () => {
