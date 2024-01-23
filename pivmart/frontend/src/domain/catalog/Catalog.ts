@@ -1,10 +1,10 @@
 export type Catalog = {
-  catalogKey: string
+  id: string
   displayName: string
 }
 
 export class CatalogModel implements Catalog {
-  constructor(public catalogKey: string,
+  constructor(public id: string,
               public displayName: string) {
   }
 }

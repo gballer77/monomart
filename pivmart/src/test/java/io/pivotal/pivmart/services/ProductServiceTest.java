@@ -11,10 +11,9 @@ class ProductServiceTest {
 
     @Test
     void getAll() {
-        CatalogRepository catalogRepository = mock(CatalogRepository.class);
         ProductRepository productRepository = mock(ProductRepository.class);
 
-        ProductService productService = new ProductService(catalogRepository, productRepository);
+        ProductService productService = new ProductService(productRepository);
 
         productService.getAll();
 

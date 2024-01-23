@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -16,8 +17,13 @@ import java.util.UUID;
 @Table(name = "products")
 public class Product {
     @Id
+    @GeneratedValue(generator = "uuid-hibernate-generator")
+    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    private UUID catalogId;
+
+    @OneToOne
+    private Catalog catalog;
+
     private String name;
     private String price;
     private String description;

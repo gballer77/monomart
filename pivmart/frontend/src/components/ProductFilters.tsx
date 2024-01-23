@@ -18,10 +18,10 @@ export const ProductFilters = (props: Props) => {
       <div>
         {filterCategories.map((category, i) =>
           <button
-            key={`${i}_${category.catalogKey}`}
-            disabled={activeCategory === category.catalogKey}
+            key={`${i}_${category.id}`}
+            disabled={activeCategory === category.id}
             onClick={() => {
-              setActiveFilterCategory(category.catalogKey);
+              setActiveFilterCategory(category.id);
             }}>
             {category.displayName}
           </button>

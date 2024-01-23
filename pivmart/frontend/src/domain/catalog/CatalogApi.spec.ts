@@ -13,7 +13,7 @@ describe("CatalogApi", () => {
 });
 
 test('getDefaultCatalog', () => {
-  const defaultCatalog = getDefaultCatalog([{catalogKey: 'expected'} as Catalog, {catalogKey: ''} as Catalog]);
+  const defaultCatalog = getDefaultCatalog([{id: 'expected'} as Catalog, {id: ''} as Catalog]);
 
   expect(defaultCatalog).toEqual('expected');
 });

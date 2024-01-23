@@ -9,7 +9,7 @@ export class CatalogApi {
 
 export function getDefaultCatalog(categories: Catalog[]): string {
   if (categories && categories[0]) {
-    return categories[0].catalogKey;
+    return categories[0].id;
   }
 
   return '';

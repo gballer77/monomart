@@ -23,6 +23,8 @@ HELP.md
 *.ipr
 out/
 
+create.sql
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
