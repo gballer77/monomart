@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const ProductCard = (props: Props) => {
-  const {name, price, description, imageSrc, imageAlt} = props.product;
+  const {name, price, description, imageSrc, imageAlt, quantity} = props.product;
   return (
     <section className="product-card">
       <header>
@@ -18,6 +18,7 @@ export const ProductCard = (props: Props) => {
         <img src={imageSrc} alt={imageAlt}/>
         <p className="description">{description}</p>
         <p className="price">${price}</p>
+        <p className="quantity">Qty: {quantity}</p>
       </main>
       <footer>
         <button

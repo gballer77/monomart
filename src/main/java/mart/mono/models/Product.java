@@ -17,8 +17,6 @@ import java.util.UUID;
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(generator = "uuid-hibernate-generator")
-    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
     @OneToOne
@@ -29,4 +27,6 @@ public class Product {
     private String description;
     private String imageSrc;
     private String imageAlt;
+
+    private int quantity;
 }

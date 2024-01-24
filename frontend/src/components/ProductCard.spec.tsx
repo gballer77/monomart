@@ -14,7 +14,8 @@ describe("ProductCard", () => {
       '19.99',
       "A fake description",
       "http://fakeimagelink",
-      "Fake image alt text"
+      "Fake image alt text",
+        10
     );
   });
 

@@ -4,7 +4,8 @@ export interface Product {
   price: string,
   description: string,
   imageSrc: string,
-  imageAlt: string
+  imageAlt: string,
+  quantity: number
 }
 
 export class ProductModel implements Product {
@@ -14,6 +15,7 @@ export class ProductModel implements Product {
               public price: string,
               public description: string,
               public imageSrc: string,
-              public imageAlt: string) {
+              public imageAlt: string,
+              public quantity: number) {
   }
 }

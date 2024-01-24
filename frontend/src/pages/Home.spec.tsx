@@ -37,7 +37,8 @@ describe("Home", () => {
         description: "Fake Product 1 description",
         price: '19.99',
         imageSrc: "https://picsum.photos/200/300",
-        imageAlt: "Product 1 Alt"
+        imageAlt: "Product 1 Alt",
+        quantity: 10
       },
       {
         id: "12346",
@@ -45,7 +46,8 @@ describe("Home", () => {
         description: "Fake Product 2 description",
         price: '19.99',
         imageSrc: "https://picsum.photos/200/300",
-        imageAlt: "Product 2 Alt"
+        imageAlt: "Product 2 Alt",
+        quantity: 10
       },
       {
         id: "12347",
@@ -53,7 +55,8 @@ describe("Home", () => {
         description: "Fake Product 3 description",
         price: '19.99',
         imageSrc: "https://picsum.photos/200/300",
-        imageAlt: "Product 3 Alt"
+        imageAlt: "Product 3 Alt",
+        quantity: 10
       }
     ];
     const productApi = new ProductApi();

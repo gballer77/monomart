@@ -13,8 +13,11 @@ import java.util.UUID;
 public class CartService {
     private CartRepository cartRepository;
 
-    public CartService(CartRepository cartRepository) {
+    private ProductService productService;
+
+    public CartService(CartRepository cartRepository, ProductService productService) {
         this.cartRepository = cartRepository;
+        this.productService = productService;
     }
 
     public List<CartItem> get() {
@@ -35,6 +38,9 @@ public class CartService {
 
     public void checkOut() {
         List<CartItem> cart = cartRepository.findAll();
-//        cartPublisher.publish(cart);
+        cart.forEach(cartItem -> {
+           productService.decrementProductQuantity(cartItem.getProduct().getId(), cartItem.getQuantity());
+        });
+        cartRepository.deleteAll();
     }
 }

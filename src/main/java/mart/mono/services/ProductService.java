@@ -5,6 +5,8 @@ import mart.mono.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -13,6 +15,17 @@ public class ProductService {
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    public void decrementProductQuantity(UUID productId, int quantity) {
+        Optional<Product> product = productRepository.findById(productId);
+        if(product.isPresent()) {
+            Product updatedProduct = product.get();
+            int currentQuantity = product.get().getQuantity();
+            int newQuantity = Math.max(currentQuantity - quantity, 0);
+            updatedProduct.setQuantity(newQuantity);
+            productRepository.save(updatedProduct);
+        }
     }
 
     public List<Product> getForCatalog(String catalogKey) {
