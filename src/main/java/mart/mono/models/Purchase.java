@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Data
 @Entity
@@ -24,4 +25,10 @@ public class Purchase {
 
     @OneToMany
     private List<CartItem> items;
+
+    public double sumCost(){
+        AtomicReference<Double> sum = new AtomicReference<>(0.0);
+        items.forEach(cartItem -> sum.updateAndGet(v -> new Double((double) (v + Double.parseDouble(cartItem.getProduct().getPrice()) * cartItem.getQuantity()))));
+        return sum.get();
+    }
 }
