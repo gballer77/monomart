@@ -17,15 +17,21 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public void decrementProductQuantity(UUID productId, int quantity) {
+    public boolean decrementProductQuantity(UUID productId, int quantity) {
         Optional<Product> product = productRepository.findById(productId);
         if(product.isPresent()) {
             Product updatedProduct = product.get();
             int currentQuantity = product.get().getQuantity();
-            int newQuantity = Math.max(currentQuantity - quantity, 0);
+            int newQuantity = currentQuantity - quantity;
+
+            if (newQuantity < 0) {
+                return false;
+            }
+
             updatedProduct.setQuantity(newQuantity);
             productRepository.save(updatedProduct);
         }
+        return true;
     }
 
     public List<Product> getForCatalog(String catalogKey) {

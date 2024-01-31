@@ -28,7 +28,7 @@ public class Purchase {
 
     public double sumCost(){
         AtomicReference<Double> sum = new AtomicReference<>(0.0);
-        items.forEach(cartItem -> sum.updateAndGet(v -> new Double((double) (v + Double.parseDouble(cartItem.getProduct().getPrice()) * cartItem.getQuantity()))));
+        items.forEach(purchasedItem -> sum.updateAndGet(v -> new Double((double) (v + Double.parseDouble(purchasedItem.getProduct().getPrice()) * purchasedItem.getQuantity()))));
         return sum.get();
     }
 }

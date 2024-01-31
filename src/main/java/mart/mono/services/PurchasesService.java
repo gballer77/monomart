@@ -17,6 +17,7 @@ public class PurchasesService {
 
     public PurchasesService(PurchasesRepository purchasesRepository, ProductService productService) {
         this.purchasesRepository = purchasesRepository;
+        this.productService = productService;
     }
 
     public List<Purchase> getAll() {
