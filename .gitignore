@@ -6,7 +6,8 @@ HELP.md
 !**/src/test/**
 **/src/main/resources/static
 .DS_Store
-
+./bin/*
+.bin
 ### STS ###
 .apt_generated
 .classpath
