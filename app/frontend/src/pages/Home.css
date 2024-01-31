@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
+    Helvetica, sans-serif;
+}
+
+.title {
+    margin: 0;
+    width: 100%;
+    padding-top: 80px;
+    line-height: 1.15;
+    font-size: 48px;
+    text-align: center;
+}
+
+.product-catalog {
+    max-width: 880px;
+    margin: 80px auto 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
