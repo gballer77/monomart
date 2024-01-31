@@ -1,7 +1,5 @@
-package mart.mono.controllers;
+package mart.mono.purchases;
 
-import mart.mono.models.Purchase;
-import mart.mono.services.PurchasesService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

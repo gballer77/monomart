@@ -1,10 +1,11 @@
-package mart.mono.models;
+package mart.mono.purchases;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mart.mono.cart.CartItem;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;

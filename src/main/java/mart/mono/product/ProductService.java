@@ -1,7 +1,5 @@
-package mart.mono.services;
+package mart.mono.product;
 
-import mart.mono.models.Product;
-import mart.mono.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

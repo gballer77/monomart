@@ -1,8 +1,7 @@
-package mart.mono.services;
+package mart.mono.purchases;
 
-import mart.mono.models.CartItem;
-import mart.mono.models.Purchase;
-import mart.mono.repositories.PurchasesRepository;
+import mart.mono.cart.CartItem;
+import mart.mono.product.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
