@@ -9,8 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.springframework.web.servlet.resource.ResourceResolverChain;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotNull;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 import static java.util.concurrent.TimeUnit.DAYS;
