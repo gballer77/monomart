@@ -1,14 +1,11 @@
 package mart.mono.services;
 
 import mart.mono.models.CartItem;
-import mart.mono.models.Product;
 import mart.mono.models.Purchase;
-import mart.mono.repositories.ProductRepository;
 import mart.mono.repositories.PurchasesRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
