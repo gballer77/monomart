@@ -30,12 +30,11 @@ public class CartTest {
     @Autowired
     MockMvc mockMvc;
 
+
+
     private ResultActions addItemToCart(UUID id) throws Exception {
         UUID catalogId = UUID.randomUUID();
 
-
-
-        //language=JSON
         String requestBody = "{\n" +
                 "  \"id\": \"" + id + "\",\n" +
                 "  \"catalogId\": \"" + catalogId + "\",\n" +
