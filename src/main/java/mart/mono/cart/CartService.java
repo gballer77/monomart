@@ -12,6 +12,7 @@ import java.util.UUID;
 public class CartService {
     private CartRepository cartRepository;
 
+    // STRANGER DANGER!!!
     private PurchasesService purchasesService;
 
     public CartService(CartRepository cartRepository, PurchasesService purchasesService) {
