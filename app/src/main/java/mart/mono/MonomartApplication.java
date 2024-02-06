@@ -8,10 +8,10 @@ import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication(scanBasePackages = "mart.product")
 @ComponentScan("mart.product")
+@SpringBootApplication(scanBasePackages = "mart.product")
 @EnableJpaRepositories(basePackages = "mart.product")
-@EntityScan("mart.product.*")
+@EntityScan("mart.product")
 public class MonomartApplication {
 
     public static void main(String[] args) {
