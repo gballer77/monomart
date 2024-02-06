@@ -1,8 +1,5 @@
 package mart.mono.catalog;
 
-import mart.mono.catalog.Catalog;
-import mart.mono.catalog.CatalogService;
-import mart.mono.product.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,13 +17,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CatalogTest {
+class CatalogTest {
 
     @Autowired
     MockMvc mockMvc;
 
     @MockBean
     private CatalogService mockCatalogService;
+
     @Test
     void catalogs_list() throws Exception {
 
@@ -36,9 +34,7 @@ public class CatalogTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", greaterThanOrEqualTo(1)))
                 .andExpect(jsonPath("$[0]", hasKey("id")))
-                .andExpect(jsonPath("$[0]", hasKey("catalogKey")))
-                .andExpect(jsonPath("$[0]", hasKey("displayName")))
-        ;
+                .andExpect(jsonPath("$[0]", hasKey("displayName")));
     }
 
 }

@@ -1,7 +1,5 @@
 package mart.mono.product;
 
-import mart.mono.product.ProductService;
-import mart.mono.product.ProductRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;

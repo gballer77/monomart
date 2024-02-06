@@ -1,8 +1,5 @@
 package mart.mono.product;
 
-import mart.mono.product.Product;
-import mart.mono.product.ProductRepository;
-import mart.mono.product.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -38,7 +35,7 @@ public class ProductTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", greaterThan(0)))
                 .andExpect(jsonPath("$[0]", hasKey("name")))
-                .andExpect(jsonPath("$[0]", hasKey("catalogId")))
+                .andExpect(jsonPath("$[0]", hasKey("catalog")))
                 .andDo(print());
     }
 
