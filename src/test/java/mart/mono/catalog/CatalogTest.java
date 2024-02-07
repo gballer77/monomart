@@ -35,6 +35,5 @@ class CatalogTest {
                 .andExpect(jsonPath("$.length()", greaterThanOrEqualTo(1)))
                 .andExpect(jsonPath("$[0]", hasKey("id")))
                 .andExpect(jsonPath("$[0]", hasKey("displayName")));
-    }
-
+        }
 }

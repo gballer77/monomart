@@ -1,7 +1,6 @@
 package mart.mono.purchases;
 
 import mart.mono.cart.CartItem;
-import mart.mono.product.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
