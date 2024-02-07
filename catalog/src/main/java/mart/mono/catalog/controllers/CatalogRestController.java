@@ -1,11 +1,12 @@
-package catalog.controllers;
+package mart.mono.catalog.controllers;
 
 
+import mart.mono.catalog.models.Catalog;
+import mart.mono.catalog.services.CatalogService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.catalog.Catalog;
 import java.util.List;
 
 @RestController

@@ -1,8 +1,8 @@
 package mart.mono;
 
-import mart.mono.models.Catalog;
 import mart.mono.models.Product;
-import mart.mono.services.CatalogService;
+import mart.mono.catalog.models.Catalog;
+import mart.mono.catalog.services.CatalogService;
 import mart.mono.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

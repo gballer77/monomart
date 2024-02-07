@@ -1,8 +1,8 @@
-package catalog.services;
+package mart.mono.catalog.services;
 
 
-import catalog.models.Catalog;
-import catalog.repositories.CatalogRepository;
+import mart.mono.catalog.models.Catalog;
+import mart.mono.catalog.repositories.CatalogRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
