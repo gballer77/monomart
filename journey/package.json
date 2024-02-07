@@ -6,11 +6,11 @@
     "test": "bash stop-server.sh && start-server-and-test 'cd .. && ./gradlew bootRun' http-get://localhost:8080 'yarn cypress:run'"
   },
   "dependencies": {
-    "cypress": "^13",
+    "cypress": "^13.6.4",
     "start-server-and-test": "^1",
     "typescript": "^5"
   },
   "devDependencies": {
-    "@testing-library/cypress": "^10"
+    "@testing-library/cypress": "^8.0.7"
   }
 }
