@@ -1,5 +1,5 @@
 describe('monomart app', () => {
   it('passes', () => {
-    cy.visit('https://localhost:8080')
+    cy.visit('http://localhost:8080')
   })
 })
