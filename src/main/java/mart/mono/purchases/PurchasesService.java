@@ -23,13 +23,12 @@ public class PurchasesService {
 
     public boolean purchase(List<CartItem> cartItems) {
         RestClient client = RestClient.create();
-
         try {
             purchasesRepository.save(new Purchase(UUID.randomUUID(), cartItems));
             cartItems.forEach(cartItem -> {
-                RestClient.ResponseSpec responseSpec = client.post().uri("http://localhost:8080/api/products/{id}?quantity=-{quantity}", cartItem.getProduct().getId(), cartItem.getProduct().getQuantity())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .retrieve();
+                RestClient.ResponseSpec responseSpec = client.patch()
+                    .uri("http://localhost:8080/api/products/{id}/decrement?quantity={quantity}", cartItem.getProduct().getId(), cartItem.getQuantity())
+                    .retrieve();
 //                productService.decrementProductQuantity(cartItem.getProduct().getId(), cartItem.getQuantity());
             });
             return true;
