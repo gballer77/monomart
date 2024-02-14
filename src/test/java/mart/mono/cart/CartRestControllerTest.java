@@ -1,7 +1,7 @@
 package mart.mono.cart;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mart.mono.product.Product;
+import mart.mono.cart.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

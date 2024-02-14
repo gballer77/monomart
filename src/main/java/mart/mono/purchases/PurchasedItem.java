@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mart.mono.product.Product;
+import mart.mono.cart.Product;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.*;
@@ -22,7 +22,7 @@ public class PurchasedItem {
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @OneToOne
+
     @JoinColumn(name ="product_id", nullable = false)
     private Product product;
 

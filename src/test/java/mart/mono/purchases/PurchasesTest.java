@@ -13,6 +13,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasKey;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,5 +35,12 @@ class PurchasesTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", greaterThan(0)))
                 .andExpect(jsonPath("$[0]", hasKey("items")));
+    }
+
+    @Test
+    void hits_purchaseApi() throws Exception {
+
+        mockMvc.perform(patch("http://localhost:8080/api/products/UUID/decrement?quantity=2"))
+                .andExpect(status().isOk());
     }
 }
