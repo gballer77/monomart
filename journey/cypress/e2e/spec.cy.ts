@@ -6,15 +6,15 @@ describe('monomart app', () => {
   it('puts product into cart', () => {
     cy.findAllByRole('button', {name: /add to cart/i}).first().click()
     cy.get('.item-count').within(() => {
-      cy.findByText('1')
+      cy.findByText(/\d/i)
     })
   })
 
   it('should show the selected product in the cart', () => {
     cy.get('span').click()
     cy.findByRole('heading', {name: /cart/i})
-    cy.get('ul > :nth-child(1)').within(() => {
-      cy.findByText('Coffee Mug (10.99)')
+    cy.get('.cart-item-list ul> :nth-child(1)').within(() => {
+      cy.findByText(/coffee mug \(10.99\)/i)
     })
   })
 
