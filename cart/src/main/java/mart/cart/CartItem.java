@@ -1,10 +1,11 @@
-package mart.mono.models;
+package mart.cart;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mart.ports.Purchaseable;
 import mart.product.Product;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cart_items")
-public class CartItem {
+public class CartItem implements Purchaseable {
     @Id
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
@@ -28,4 +29,15 @@ public class CartItem {
     private Product product;
 
     private Integer quantity;
+
+
+    @Override
+    public UUID getProductId() {
+        return product.getId();
+    }
+
+    @Override
+    public String getPrice() {
+        return product.getPrice();
+    }
 }

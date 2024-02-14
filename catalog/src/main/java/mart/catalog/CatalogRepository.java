@@ -1,12 +1,11 @@
-package mart.mono.repositories;
+package mart.catalog;
 
-import mart.mono.models.Purchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public interface PurchasesRepository extends JpaRepository<Purchase, UUID> {
+public interface CatalogRepository extends JpaRepository<Catalog, UUID> {
 
 }

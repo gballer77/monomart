@@ -28,6 +28,9 @@ dependencyManagement {
     }
 }
 dependencies {
+    implementation project(':shared')
+    implementation project(':catalog')
+
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'

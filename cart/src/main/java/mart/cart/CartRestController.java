@@ -1,7 +1,5 @@
-package mart.mono.controllers;
+package mart.cart;
 
-import mart.mono.models.CartItem;
-import mart.mono.services.CartService;
 import mart.product.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

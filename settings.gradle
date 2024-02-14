@@ -14,4 +14,8 @@ pluginManagement {
 }
 rootProject.name = 'monomart'
 include 'product'
+include 'cart'
+include 'shared'
+include 'purchase'
+include 'catalog'
 

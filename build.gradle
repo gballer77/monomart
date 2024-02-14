@@ -24,6 +24,10 @@ ext {
 
 dependencies {
     implementation project(':product')
+    implementation project(':shared')
+    implementation project(':cart')
+    implementation project(':purchase')
+    implementation project(':catalog')
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'

@@ -1,10 +1,11 @@
-package mart.mono.services;
+package mart.cart;
 
-import mart.mono.models.CartItem;
-import mart.mono.repositories.CartRepository;
+import mart.ports.PointOfSale;
+import mart.ports.Purchaseable;
 import mart.product.Product;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -13,11 +14,11 @@ import java.util.UUID;
 public class CartService {
     private CartRepository cartRepository;
 
-    private PurchasesService purchasesService;
+    private PointOfSale pointOfSale;
 
-    public CartService(CartRepository cartRepository, PurchasesService purchasesService) {
+    public CartService(CartRepository cartRepository, PointOfSale pointOfSale) {
         this.cartRepository = cartRepository;
-        this.purchasesService = purchasesService;
+        this.pointOfSale = pointOfSale;
     }
 
     public List<CartItem> get() {
@@ -37,8 +38,8 @@ public class CartService {
     }
 
     public void checkOut() {
-        List<CartItem> cart = cartRepository.findAll();
-        boolean purchaseSuccess = purchasesService.purchase(cart);
+        List<Purchaseable> cart = new ArrayList<>(cartRepository.findAll());
+        boolean purchaseSuccess = pointOfSale.purchase(cart);
         if (purchaseSuccess) {
             cartRepository.deleteAll();
         }

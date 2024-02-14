@@ -1,7 +1,5 @@
-package mart.mono.controllers;
+package mart.catalog;
 
-import mart.product.Catalog;
-import mart.mono.services.CatalogService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

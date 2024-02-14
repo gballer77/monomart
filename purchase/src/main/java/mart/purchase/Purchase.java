@@ -1,10 +1,11 @@
-package mart.mono.models;
+package mart.purchase;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mart.ports.Purchaseable;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
@@ -24,11 +25,20 @@ public class Purchase {
     private UUID id;
 
     @OneToMany
-    private List<CartItem> items;
+    private List<PurchasedItem> items;
 
-    public double sumCost(){
+    public double sumCost() {
         AtomicReference<Double> sum = new AtomicReference<>(0.0);
-        items.forEach(purchasedItem -> sum.updateAndGet(v -> new Double((double) (v + Double.parseDouble(purchasedItem.getProduct().getPrice()) * purchasedItem.getQuantity()))));
+        items.forEach(purchasedItem -> sum.updateAndGet(v -> (v + Double.parseDouble(purchasedItem.getPrice()) * purchasedItem.getQuantity())));
         return sum.get();
+    }
+
+    public static Purchase ofPurchaseable(List<Purchaseable> purchaseables) {
+        List<PurchasedItem> purchasedItemList = purchaseables.stream()
+                .map(purchaseable -> PurchasedItem.builder()
+                        .price(purchaseable.getPrice())
+                        .quantity(purchaseable.getQuantity()).build())
+                .toList();
+        return Purchase.builder().items(purchasedItemList).build();
     }
 }
