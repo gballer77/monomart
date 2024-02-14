@@ -2,6 +2,7 @@ package mart.mono.services;
 
 import mart.mono.models.CartItem;
 import mart.mono.models.Purchase;
+import mart.mono.product.services.ProductService;
 import mart.mono.repositories.PurchasesRepository;
 import org.springframework.stereotype.Service;
 

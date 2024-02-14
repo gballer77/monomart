@@ -1,7 +1,7 @@
 package mart.mono.services;
 
 import mart.mono.models.CartItem;
-import mart.mono.models.Product;
+import mart.mono.product.models.Product;
 import mart.mono.repositories.CartRepository;
 import org.springframework.stereotype.Service;
 

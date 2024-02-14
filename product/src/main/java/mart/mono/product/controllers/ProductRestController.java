@@ -1,7 +1,8 @@
-package mart.mono.controllers;
+package mart.mono.product.controllers;
 
-import mart.mono.models.Product;
-import mart.mono.services.ProductService;
+
+import mart.mono.product.models.Product;
+import mart.mono.product.services.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -1,6 +1,6 @@
-package mart.mono.repositories;
+package mart.mono.product.repositories;
 
-import mart.mono.models.Product;
+import mart.mono.product.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

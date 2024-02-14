@@ -1,9 +1,9 @@
 package mart.mono;
 
-import mart.mono.models.Product;
+import mart.mono.product.models.Product;
 import mart.mono.catalog.models.Catalog;
 import mart.mono.catalog.services.CatalogService;
-import mart.mono.services.ProductService;
+import mart.mono.product.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
