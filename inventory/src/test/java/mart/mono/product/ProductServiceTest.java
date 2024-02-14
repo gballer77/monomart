@@ -1,20 +1,18 @@
 package mart.mono.product;
 
 import org.junit.jupiter.api.Test;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import org.mockito.Mockito;
 
 class ProductServiceTest {
 
     @Test
     void getAll() {
-        ProductRepository productRepository = mock(ProductRepository.class);
+        ProductRepository productRepository = Mockito.mock(ProductRepository.class);
 
         ProductService productService = new ProductService(productRepository);
 
         productService.getAll();
 
-        verify(productRepository).findAll();
+        Mockito.verify(productRepository).findAll();
     }
 }
