@@ -3,6 +3,8 @@ package mart.mono.cart;
 import mart.mono.cart.Product;
 import mart.mono.purchases.PurchasesService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,18 +13,23 @@ import java.util.UUID;
 @Service
 public class CartService {
     private CartRepository cartRepository;
+    private RestClient client;
 
-    // STRANGER DANGER!!!
-    private PurchasesService purchasesService;
 
-    public CartService(CartRepository cartRepository, PurchasesService purchasesService) {
+    public CartService(CartRepository cartRepository) {
         this.cartRepository = cartRepository;
-        this.purchasesService = purchasesService;
+        this.client = RestClient.create();
+    }
+
+    public CartService(CartRepository cartRepository, RestClient restClient) {
+        this.cartRepository = cartRepository;
+        this.client = restClient;
     }
 
     public List<CartItem> get() {
         return cartRepository.findAll();
     }
+
 
     public CartItem add(Product product) {
         return cartRepository.save(CartItem.builder()
@@ -38,7 +45,12 @@ public class CartService {
 
     public void checkOut() {
         List<CartItem> cart = cartRepository.findAll();
-        boolean purchaseSuccess = purchasesService.purchase(cart);
+        boolean purchaseSuccess = Boolean.TRUE.equals(
+                client.post()
+                        .uri("http://localhost:8080/api/products")
+                        .body(cart)
+                        .retrieve()
+                        .body(Boolean.class));
         if (purchaseSuccess) {
             cartRepository.deleteAll();
         }

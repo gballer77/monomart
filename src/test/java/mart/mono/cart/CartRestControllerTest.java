@@ -1,6 +1,7 @@
 package mart.mono.cart;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import mart.mono.MonomartApplication;
 import mart.mono.cart.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -20,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CartRestController.class)
+@ContextConfiguration(classes = MonomartApplication.class)
 class CartRestControllerTest {
 
   @MockBean

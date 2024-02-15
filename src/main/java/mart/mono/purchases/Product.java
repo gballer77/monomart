@@ -1,9 +1,5 @@
-package mart.mono.cart;
+package mart.mono.purchases;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,9 +15,14 @@ import java.util.UUID;
 public class Product {
 
     private UUID id;
+
+    private Catalog catalog;
+
     private String name;
     private String price;
     private String description;
     private String imageSrc;
     private String imageAlt;
+
+    private int quantity;
 }

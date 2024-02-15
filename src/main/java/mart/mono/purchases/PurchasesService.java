@@ -1,7 +1,5 @@
 package mart.mono.purchases;
 
-import mart.mono.cart.CartItem;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -26,8 +24,8 @@ public class PurchasesService {
         try {
             purchasesRepository.save(new Purchase(UUID.randomUUID(), cartItems));
             cartItems.forEach(cartItem -> client.patch()
-                 .uri("http://localhost:8080/api/products/{id}/decrement?quantity={quantity}", cartItem.getProduct().getId(), cartItem.getQuantity())
-                 .retrieve());
+                    .uri("http://localhost:8080/api/products/{id}/decrement?quantity={quantity}", cartItem.getProduct().getId(), cartItem.getQuantity())
+                    .retrieve());
             return true;
         } catch (Exception e) {
             return false;
