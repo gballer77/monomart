@@ -1,6 +1,5 @@
 package mart.mono.cart;
 
-import mart.mono.cart.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class CartRestController {
     }
 
     @PostMapping("checkout")
-    public ResponseEntity checkOut() {
+    public ResponseEntity<Void> checkOut() {
         cartService.checkOut();
         return ResponseEntity.ok().build();
     }

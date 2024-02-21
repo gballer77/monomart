@@ -1,6 +1,6 @@
 package mart.mono.purchases;
 
-import mart.mono.purchases.CartItem;
+import mart.mono.cart.CartItem;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

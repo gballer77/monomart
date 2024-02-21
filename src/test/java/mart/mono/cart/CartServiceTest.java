@@ -4,15 +4,16 @@ import mart.mono.MonomartApplication;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 @WebMvcTest(CartService.class)
 @ContextConfiguration(classes = MonomartApplication.class)
 class CartServiceTest {
@@ -30,47 +32,45 @@ class CartServiceTest {
     CartRepository cartRepository;
 
     @Mock
-    private RestClient mockRestClient;
+    private RestTemplate mockRestTemplate;
 
-    @Autowired
     @InjectMocks
     CartService cartService;
 
 
     @Captor
-    ArgumentCaptor<CartItem> cartItem;
+    ArgumentCaptor<CartItemEntity> cartItem;
 
     @Test
     @DisplayName("Should give list of all cart items")
     void returnListOfCartItems() {
-        List<CartItem> cartItems = List.of(CartItem
+        List<CartItemEntity> cartItemEntities = List.of(CartItemEntity
                 .builder()
                 .quantity(69)
                 .build());
-        when(cartRepository.findAll()).thenReturn(cartItems);
+        when(cartRepository.findAll()).thenReturn(cartItemEntities);
 
         List<CartItem> returnedItems = cartService.get();
 
-        assertEquals(cartItems, returnedItems);
+        assertEquals(cartItemEntities.stream().map(cartItemEntity -> cartItemEntity.toCartItem(null)).toList(), returnedItems);
         verify(cartRepository, times(1)).findAll();
     }
 
     @Test
     @DisplayName("Should add single item to cart when given product")
     void addSingleProduct() {
+        UUID id = UUID.randomUUID();
         Product product = Product
                 .builder()
                 .name("GBaller's Secret Pokemon Card Collection")
+                .id(id)
                 .build();
-
+        when(cartRepository.save(cartItem.capture())).thenReturn(CartItemEntity.builder().build());
         cartService.add(product);
-        verify(cartRepository).save(cartItem.capture());
-        CartItem cartItemResolvedValue = cartItem.getValue();
+        CartItemEntity cartItemEntityResolvedValue = cartItem.getValue();
 
-        assertEquals("GBaller's Secret Pokemon Card Collection", cartItemResolvedValue
-                .getProduct()
-                .getName());
-        assertEquals(1, cartItemResolvedValue.getQuantity());
+        assertEquals(id, cartItemEntityResolvedValue.getProductId());
+        assertEquals(1, cartItemEntityResolvedValue.getQuantity());
     }
 
     @Nested
@@ -82,7 +82,7 @@ class CartServiceTest {
         void removeSuccess() {
             UUID uuid = UUID.randomUUID();
             when(cartRepository.findById(uuid))
-                    .thenReturn(Optional.of(CartItem
+                    .thenReturn(Optional.of(CartItemEntity
                             .builder()
                             .id(uuid)
                             .build()));
@@ -109,38 +109,47 @@ class CartServiceTest {
     @DisplayName("Request Checkout")
     class checkout {
         @Test
-        @DisplayName("Should request to checkout items in cart")
+        @DisplayName("Should remove all items in cart when purchase success")
         void checkOutRequest() {
-            List<CartItem> items = List.of(CartItem
+            List<CartItemEntity> items = List.of(CartItemEntity
                     .builder()
                     .id(UUID.randomUUID())
                     .build());
+
+            when(mockRestTemplate.postForObject(
+                   "http://localhost:8080/api/products",
+                    items,
+                    Boolean.class)
+            ).thenReturn(Boolean.TRUE);
+
             when(cartRepository.findAll()).thenReturn(items);
-            when(mockRestClient.post()).thenReturn(null);
+
             cartService.checkOut();
 
-            verify(mockRestClient).post();
+            verify(cartRepository, times(1)).deleteAll();
         }
-//
-//        @Test
-//        @DisplayName("Should remove all items in cart when purchase success")
-//        void checkOutSuccess() {
-//            when(purchasesService.purchase(any())).thenReturn(true);
-//
-//            cartService.checkOut();
-//
-//            verify(cartRepository, times(1)).deleteAll();
-//        }
-//
-//        @Test
-//        @DisplayName("Should not remove items in cart when purchase fails")
-//        void checkOutFail() {
-//            when(purchasesService.purchase(any())).thenReturn(false);
-//
-//            cartService.checkOut();
-//
-//            verify(cartRepository, times(0)).deleteAll();
-//        }
+
+
+        @Test
+        @DisplayName("Should not remove items in cart when purchase fails")
+        void checkOutFail() {
+            List<CartItemEntity> items = List.of(CartItemEntity
+                    .builder()
+                    .id(UUID.randomUUID())
+                    .build());
+
+            when(mockRestTemplate.postForObject(
+                    "http://localhost:8080/api/products",
+                    items,
+                    Boolean.class)
+            ).thenReturn(Boolean.FALSE);
+
+            when(cartRepository.findAll()).thenReturn(items);
+
+            cartService.checkOut();
+
+            verify(cartRepository, times(0)).deleteAll();
+        }
     }
 }
 

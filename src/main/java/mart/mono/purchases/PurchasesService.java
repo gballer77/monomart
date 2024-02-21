@@ -1,5 +1,6 @@
 package mart.mono.purchases;
 
+import mart.mono.cart.CartItem;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -9,7 +10,7 @@ import java.util.UUID;
 @Service
 public class PurchasesService {
 
-    private PurchasesRepository purchasesRepository;
+    private final PurchasesRepository purchasesRepository;
 
     public PurchasesService(PurchasesRepository purchasesRepository) {
         this.purchasesRepository = purchasesRepository;

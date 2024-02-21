@@ -12,7 +12,6 @@ import java.util.UUID;
 
 
 @Data
-@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,8 +22,6 @@ public class CartItem {
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @OneToOne
-    @JoinColumn(name ="product_id", nullable = false)
     private Product product;
 
     private Integer quantity;

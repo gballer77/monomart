@@ -1,11 +1,10 @@
-package mart.mono.purchases;
+package mart.mono.cart;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mart.mono.cart.Product;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
@@ -17,15 +16,19 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cart_items")
-public class CartItem {
+public class CartItemEntity {
     @Id
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @OneToOne
-    @JoinColumn(name ="product_id", nullable = false)
-    private Product product;
+    private UUID productId;
 
     private Integer quantity;
+
+    CartItem toCartItem (Product product){
+        return CartItem.builder()
+                .product(product)
+                .build();
+    }
 }

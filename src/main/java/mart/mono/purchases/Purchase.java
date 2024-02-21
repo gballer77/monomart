@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mart.mono.purchases.CartItem;
+import mart.mono.cart.CartItem;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
