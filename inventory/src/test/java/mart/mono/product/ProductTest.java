@@ -13,6 +13,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Collections;
+import java.util.UUID;
+
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -35,6 +40,16 @@ public class ProductTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0]", Matchers.hasKey("name")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0]", Matchers.hasKey("catalog")))
                 .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    void hits_purchaseApi() throws Exception {
+        UUID id = UUID.randomUUID();
+
+        mockMvc.perform(patch("/api/products/{0}/decrement?quantity=2", id))
+            .andExpect(status().isOk());
+
+        verify(mockProductService).decrementProductQuantity(id, 2);
     }
 
     @Test

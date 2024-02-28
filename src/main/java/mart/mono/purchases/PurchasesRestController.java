@@ -1,8 +1,7 @@
 package mart.mono.purchases;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import mart.mono.cart.CartItem;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
 @RequestMapping("api/purchases")
 public class PurchasesRestController {
 
-    private PurchasesService purchasesService;
+    private final PurchasesService purchasesService;
 
     public PurchasesRestController(PurchasesService purchasesService) {
         this.purchasesService = purchasesService;
@@ -19,5 +18,11 @@ public class PurchasesRestController {
     @GetMapping
     public List<Purchase> list() {
         return purchasesService.getAll();
+    }
+
+    @PostMapping()
+    public Boolean purchase(@RequestBody List<CartItem> cart){
+//       return purchasesService.purchase(cart);
+        return false;
     }
 }
