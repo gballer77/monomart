@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mart.mono.cart.CartItem;
+import mart.mono.cart.CartItemEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
@@ -25,11 +26,11 @@ public class Purchase {
     private UUID id;
 
     @OneToMany
-    private List<CartItem> items;
-
-    public double sumCost(){
-        AtomicReference<Double> sum = new AtomicReference<>(0.0);
-        items.forEach(purchasedItem -> sum.updateAndGet(v -> new Double((double) (v + Double.parseDouble(purchasedItem.getProduct().getPrice()) * purchasedItem.getQuantity()))));
-        return sum.get();
-    }
+    private List<CartItemEntity> items;
+//
+//    public double sumCost(){
+//        AtomicReference<Double> sum = new AtomicReference<>(0.0);
+//        items.forEach(purchasedItem -> sum.updateAndGet(v -> new Double((double) (v + Double.parseDouble(purchasedItem.getProductId()) * purchasedItem.getQuantity()))));
+//        return sum.get();
+//    }
 }

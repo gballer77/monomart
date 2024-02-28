@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("api/purchases")
 public class PurchasesRestController {
 
-    private PurchasesService purchasesService;
+    private final PurchasesService purchasesService;
 
     public PurchasesRestController(PurchasesService purchasesService) {
         this.purchasesService = purchasesService;
@@ -20,8 +20,8 @@ public class PurchasesRestController {
         return purchasesService.getAll();
     }
 
-    @PostMapping()
-    public Boolean purchase (@RequestBody List<CartItem> cart){
-       return purchasesService.purchase(cart);
-    }
+//    @PostMapping()
+//    public Boolean purchase (@RequestBody List<CartItem> cart){
+//       return purchasesService.purchase(cart);
+//    }
 }

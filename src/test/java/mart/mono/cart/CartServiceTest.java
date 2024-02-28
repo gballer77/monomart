@@ -1,6 +1,7 @@
 package mart.mono.cart;
 
 import mart.mono.MonomartApplication;
+import mart.mono.purchases.PurchasesService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -24,19 +25,19 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@WebMvcTest(CartService.class)
-@ContextConfiguration(classes = MonomartApplication.class)
 class CartServiceTest {
 
-    @MockBean
+    @Mock
     CartRepository cartRepository;
 
     @Mock
-    private RestTemplate mockRestTemplate;
+    RestTemplate mockRestTemplate;
+
+    @Mock
+    PurchasesService purchasesService;
 
     @InjectMocks
     CartService cartService;
-
 
     @Captor
     ArgumentCaptor<CartItemEntity> cartItem;
@@ -116,14 +117,8 @@ class CartServiceTest {
                     .id(UUID.randomUUID())
                     .build());
 
-            when(mockRestTemplate.postForObject(
-                   "http://localhost:8080/api/products",
-                    items,
-                    Boolean.class)
-            ).thenReturn(Boolean.TRUE);
-
             when(cartRepository.findAll()).thenReturn(items);
-
+            when (purchasesService.purchase(items)).thenReturn(true);
             cartService.checkOut();
 
             verify(cartRepository, times(1)).deleteAll();
@@ -138,13 +133,9 @@ class CartServiceTest {
                     .id(UUID.randomUUID())
                     .build());
 
-            when(mockRestTemplate.postForObject(
-                    "http://localhost:8080/api/products",
-                    items,
-                    Boolean.class)
-            ).thenReturn(Boolean.FALSE);
-
             when(cartRepository.findAll()).thenReturn(items);
+            when (purchasesService.purchase(items)).thenReturn(false);
+
 
             cartService.checkOut();
 

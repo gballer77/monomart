@@ -22,8 +22,7 @@ public class PurchasedItem {
     private UUID id;
 
 
-    @JoinColumn(name ="product_id", nullable = false)
-    private Product product;
+    private UUID productID;
 
     private Integer quantity;
 }

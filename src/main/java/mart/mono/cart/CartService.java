@@ -1,5 +1,7 @@
 package mart.mono.cart;
 
+import lombok.AllArgsConstructor;
+import mart.mono.purchases.PurchasesService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,20 +10,16 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class CartService {
     private CartRepository cartRepository;
+    private PurchasesService purchasesService;
     private RestTemplate client;
-
-
-    public CartService(CartRepository cartRepository) {
-        this.cartRepository = cartRepository;
-        this.client = new RestTemplate();
-    }
 
     public List<CartItem> get() {
         return cartRepository.findAll().stream()
                 .map(cartItemEntity -> cartItemEntity.toCartItem(client.getForObject(
-                        "http://localhost:8080/api/products/{0}",
+                        "/api/products/{0}",
                         Product.class,
                         cartItemEntity.getProductId())))
                 .toList();
@@ -42,12 +40,8 @@ public class CartService {
 
     public void checkOut() {
         List<CartItemEntity> cart = cartRepository.findAll();
-        Boolean purchaseSuccess = client.postForObject(
-                "http://localhost:8080/api/products",
-                cart,
-                Boolean.class);
-
-        if (Boolean.TRUE.equals(purchaseSuccess)) {
+        boolean purchaseSuccess = purchasesService.purchase(cart);
+        if (purchaseSuccess) {
             cartRepository.deleteAll();
         }
     }

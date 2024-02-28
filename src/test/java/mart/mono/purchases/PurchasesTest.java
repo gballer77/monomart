@@ -1,6 +1,7 @@
 package mart.mono.purchases;
 
 import mart.mono.MonomartApplication;
+import mart.mono.product.ProductService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.UUID;
+
 import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasKey;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -28,6 +32,9 @@ class PurchasesTest {
     @MockBean
     PurchasesService mockPurchaseService;
 
+    @MockBean
+    ProductService productService;
+
     @Test
     void purchases_list() throws Exception {
         when(this.mockPurchaseService.getAll()).thenReturn(singletonList(Purchase.builder().build()));
@@ -40,8 +47,11 @@ class PurchasesTest {
 
     @Test
     void hits_purchaseApi() throws Exception {
+        UUID id = UUID.randomUUID();
 
-        mockMvc.perform(patch("http://localhost:8080/api/products/UUID/decrement?quantity=2"))
+        mockMvc.perform(patch("/api/products/{0}/decrement?quantity=2", id))
                 .andExpect(status().isOk());
+
+        verify(productService).decrementProductQuantity(id, 2);
     }
 }
