@@ -1,5 +1,7 @@
-package mart.mono.catalog;
+package mart.mono;
 
+import mart.mono.catalog.Catalog;
+import mart.mono.catalog.CatalogService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

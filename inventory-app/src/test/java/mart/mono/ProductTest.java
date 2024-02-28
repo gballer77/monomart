@@ -1,5 +1,8 @@
-package mart.mono.product;
+package mart.mono;
 
+import mart.mono.product.Product;
+import mart.mono.product.ProductRepository;
+import mart.mono.product.ProductService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -35,7 +38,7 @@ public class ProductTest {
         Mockito.when(this.mockProductService.getForCatalog("electronics")).thenReturn(Collections.singletonList(Product.builder().build()));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/products?catalog={catalog}", "electronics"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.length()", Matchers.greaterThan(0)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0]", Matchers.hasKey("name")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0]", Matchers.hasKey("catalog")))
@@ -60,6 +63,6 @@ public class ProductTest {
 
         productService.getAll();
 
-        Mockito.verify(productRepository).findAll();
+        verify(productRepository).findAll();
     }
 }

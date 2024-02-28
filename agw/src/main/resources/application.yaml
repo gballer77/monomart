@@ -7,14 +7,14 @@ spring:
       enabled: true
   cloud.gateway.mvc:
     routesMap:
-#      monoMartCatalogRoutes:
-#        uri: http://localhost:8081
-#        predicates:
-#          - Path=/api/catalogs/**
-#      monoMartProductRoutes:
-#        uri: http://localhost:8081
-#        predicates:
-#          - Path=/api/products/**
+      monoMartCatalogRoutes:
+        uri: http://localhost:8081
+        predicates:
+          - Path=/api/catalogs/**
+      monoMartProductRoutes:
+        uri: http://localhost:8081
+        predicates:
+          - Path=/api/products/**
       monoMartRoutes:
         uri: http://localhost:8080
         predicates:

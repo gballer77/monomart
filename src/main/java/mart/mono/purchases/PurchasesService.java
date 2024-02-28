@@ -1,6 +1,7 @@
 package mart.mono.purchases;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mart.mono.cart.CartItemEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PurchasesService {
 
     private final PurchasesRepository purchasesRepository;
@@ -24,10 +26,11 @@ public class PurchasesService {
         try {
             purchasesRepository.save(new Purchase(UUID.randomUUID(), cartItems));
             cartItems.forEach(cartItem ->
-                restTemplate.patchForObject("/api/products/{id}/decrement?quantity={quantity}", null, Void.class)
+                restTemplate.patchForObject("/api/products/{id}/decrement?quantity={quantity}", null, Void.class, cartItem.getProductId(), cartItem.getQuantity())
             );
             return true;
         } catch (Exception e) {
+            log.info("Nope", e);
             return false;
         }
     }

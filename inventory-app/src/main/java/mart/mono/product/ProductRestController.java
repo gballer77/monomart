@@ -33,4 +33,9 @@ public class ProductRestController {
             return ResponseEntity.ok(true);
         }
     }
+
+    @GetMapping("/{id}")
+    public Product list(@PathVariable UUID id) {
+        return productService.getForProductId(id);
+    }
 }

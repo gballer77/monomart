@@ -39,4 +39,8 @@ public class ProductService {
     public List<Product> getAll() {
         return productRepository.findAll();
     }
+
+    public Product getForProductId(UUID id) {
+        return productRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }
