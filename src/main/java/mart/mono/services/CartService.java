@@ -11,9 +11,9 @@ import java.util.UUID;
 
 @Service
 public class CartService {
-    private CartRepository cartRepository;
+    private final CartRepository cartRepository;
 
-    private PurchasesService purchasesService;
+    private final PurchasesService purchasesService;
 
     public CartService(CartRepository cartRepository, PurchasesService purchasesService) {
         this.cartRepository = cartRepository;
@@ -34,6 +34,10 @@ public class CartService {
     public void remove(UUID cartItemId) {
         Optional<CartItem> cartItem = cartRepository.findById(cartItemId);
         cartItem.ifPresent(item -> cartRepository.delete(item));
+    }
+
+    public void removeAll() {
+        cartRepository.deleteAll();
     }
 
     public void checkOut() {
