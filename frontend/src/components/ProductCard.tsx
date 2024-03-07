@@ -10,7 +10,7 @@ interface Props {
 export const ProductCard = (props: Props) => {
   const {name, price, description, imageSrc, imageAlt, quantity} = props.product;
   return (
-    <section className="product-card">
+    <section className="product-card" aria-label={name}>
       <header>
         <h3>{name}</h3>
       </header>
