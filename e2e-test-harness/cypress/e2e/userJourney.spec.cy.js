@@ -73,7 +73,7 @@ describe('given the website is rendered', () => {
         });
     });
 
-    it.only('when I add an item to the cart and checkout, it shows the item added and decrements the amount when checkout is complete', function () {
+    it('when I add an item to the cart and checkout, it shows the item added and decrements the amount when checkout is complete', function () {
         cy.visit('localhost:8080');
 
         cy.get('[aria-label="Coffee Mug"]').within(() => {

@@ -1,4 +1,4 @@
-package mart.mono.config;
+package mart.mono.inventory.product;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

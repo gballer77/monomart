@@ -1,7 +1,5 @@
-package mart.mono.services;
+package mart.mono.inventory.product;
 
-import mart.mono.models.Product;
-import mart.mono.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,13 +9,13 @@ import java.util.UUID;
 @Service
 public class ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    public boolean decrementProductQuantity(UUID productId, int quantity) {
+    public void decrementProductQuantity(UUID productId, int quantity) {
         Optional<Product> product = productRepository.findById(productId);
         if(product.isPresent()) {
             Product updatedProduct = product.get();
@@ -25,13 +23,12 @@ public class ProductService {
             int newQuantity = currentQuantity - quantity;
 
             if (newQuantity < 0) {
-                return false;
+                return;
             }
 
             updatedProduct.setQuantity(newQuantity);
             productRepository.save(updatedProduct);
         }
-        return true;
     }
 
     public List<Product> getForCatalog(String catalogKey) {

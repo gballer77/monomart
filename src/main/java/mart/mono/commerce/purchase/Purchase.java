@@ -1,29 +1,30 @@
-package mart.mono.models;
+package mart.mono.commerce.purchase;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mart.mono.commerce.cart.CartItem;
 import org.hibernate.annotations.GenericGenerator;
 
-import jakarta.persistence.*;
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "purchased_items")
-public class PurchasedItem {
+@Table(name = "purchases")
+public class Purchase {
     @Id
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @OneToOne
-    @JoinColumn(name ="product_id", nullable = false)
-    private Product product;
+    @OneToMany
+    private List<CartItem> items;
 
-    private Integer quantity;
 }

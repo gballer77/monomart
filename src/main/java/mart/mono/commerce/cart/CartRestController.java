@@ -1,8 +1,6 @@
-package mart.mono.controllers;
+package mart.mono.commerce.cart;
 
-import mart.mono.models.CartItem;
-import mart.mono.models.Product;
-import mart.mono.services.CartService;
+import mart.mono.inventory.product.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +11,7 @@ import java.util.UUID;
 @RequestMapping("api/cart")
 public class CartRestController {
 
-    private CartService cartService;
+    private final CartService cartService;
 
     public CartRestController(CartService cartService) {
         this.cartService = cartService;

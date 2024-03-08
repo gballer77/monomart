@@ -1,6 +1,5 @@
-package mart.mono.repositories;
+package mart.mono.inventory.product;
 
-import mart.mono.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
-    public List<Product> findByCatalogId(String catalogId);
+    List<Product> findByCatalogId(String catalogId);
 }

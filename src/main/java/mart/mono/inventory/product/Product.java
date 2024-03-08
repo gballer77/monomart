@@ -1,4 +1,4 @@
-package mart.mono.models;
+package mart.mono.inventory.product;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mart.mono.inventory.catalog.Catalog;
 
 import java.util.UUID;
 

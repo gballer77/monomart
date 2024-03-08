@@ -1,6 +1,6 @@
-package mart.mono.shopping;
+package mart.mono.commerce;
 
-import mart.mono.services.CartService;
+import mart.mono.commerce.cart.CartService;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
