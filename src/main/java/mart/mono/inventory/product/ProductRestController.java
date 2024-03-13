@@ -1,7 +1,5 @@
-package mart.mono.controllers;
+package mart.mono.inventory.product;
 
-import mart.mono.models.Product;
-import mart.mono.services.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +11,7 @@ import java.util.List;
 @RequestMapping("api/products")
 public class ProductRestController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductRestController(ProductService productService) {
         this.productService = productService;

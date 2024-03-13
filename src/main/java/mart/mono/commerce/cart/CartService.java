@@ -1,8 +1,7 @@
-package mart.mono.services;
+package mart.mono.commerce.cart;
 
-import mart.mono.models.CartItem;
-import mart.mono.models.Product;
-import mart.mono.repositories.CartRepository;
+import mart.mono.commerce.purchase.PurchasesService;
+import mart.mono.inventory.product.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public class CartService {
 
     public void remove(UUID cartItemId) {
         Optional<CartItem> cartItem = cartRepository.findById(cartItemId);
-        cartItem.ifPresent(item -> cartRepository.delete(item));
+        cartItem.ifPresent(cartRepository::delete);
     }
 
     public void removeAll() {

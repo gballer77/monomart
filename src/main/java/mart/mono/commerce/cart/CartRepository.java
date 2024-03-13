@@ -1,6 +1,5 @@
-package mart.mono.repositories;
+package mart.mono.commerce.cart;
 
-import mart.mono.models.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

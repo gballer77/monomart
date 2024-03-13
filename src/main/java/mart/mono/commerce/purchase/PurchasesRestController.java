@@ -1,7 +1,5 @@
-package mart.mono.controllers;
+package mart.mono.commerce.purchase;
 
-import mart.mono.models.Purchase;
-import mart.mono.services.PurchasesService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +10,7 @@ import java.util.List;
 @RequestMapping("api/purchases")
 public class PurchasesRestController {
 
-    private PurchasesService purchasesService;
+    private final PurchasesService purchasesService;
 
     public PurchasesRestController(PurchasesService purchasesService) {
         this.purchasesService = purchasesService;

@@ -1,4 +1,4 @@
-package mart.mono.config;
+package mart.mono.webapp;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;

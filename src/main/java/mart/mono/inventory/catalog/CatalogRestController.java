@@ -1,7 +1,5 @@
-package mart.mono.controllers;
+package mart.mono.inventory.catalog;
 
-import mart.mono.models.Catalog;
-import mart.mono.services.CatalogService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +10,7 @@ import java.util.List;
 @RequestMapping("api/catalogs")
 public class CatalogRestController {
 
-    private CatalogService catalogService;
+    private final CatalogService catalogService;
 
     public CatalogRestController(CatalogService catalogService) {
         this.catalogService = catalogService;
