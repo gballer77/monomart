@@ -1,7 +1,7 @@
 package mart.mono.commerce.cart;
 
+import mart.mono.commerce.product.Product;
 import mart.mono.commerce.purchase.PurchasesService;
-import mart.mono.inventory.product.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +21,17 @@ public class CartService {
 
     public List<CartItem> get() {
         return cartRepository.findAll();
+    }
+
+    // TODO Delete after April 1 2024
+    public CartItem add(mart.mono.inventory.lib.Product product) {
+        Product cartProduct = new Product(product.getId(), product.getName(), product.getPrice());
+
+        return cartRepository.save(CartItem.builder()
+            .product(cartProduct)
+            .quantity(1)
+            .build());
+
     }
 
     public CartItem add(Product product) {

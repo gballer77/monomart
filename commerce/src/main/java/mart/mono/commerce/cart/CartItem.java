@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mart.mono.inventory.product.Product;
+import mart.mono.commerce.product.Product;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;

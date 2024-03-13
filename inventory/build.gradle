@@ -4,7 +4,7 @@ plugins {
     id 'java'
 }
 
-group = 'mart.mono'
+group = 'mart.mono.inventory'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
@@ -31,8 +31,6 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
 
     implementation(project(':inventory-lib'))
-    implementation(project(':inventory'))
-    implementation(project(':commerce'))
 
     runtimeOnly 'com.h2database:h2:2.2.224'
 
@@ -53,62 +51,4 @@ dependencyManagement {
 
 test {
     useJUnitPlatform()
-}
-
-tasks.register('installFrontend', Exec) {
-    dependsOn cleanFrontend
-    inputs.file("frontend/yarn.lock")
-    inputs.file("frontend/package.json")
-    outputs.dir("frontend/node_modules")
-
-    workingDir "frontend"
-    executable "yarn"
-    args "install", "--update-checksums"
-}
-
-tasks.register('buildFrontend', Exec) {
-    dependsOn installFrontend
-    inputs.files(file("frontend").listFiles((file -> file.name != "out") as FileFilter))
-    outputs.dir("frontend/build")
-
-    workingDir "frontend"
-    executable "yarn"
-    args "build"
-}
-
-tasks.register('copyFrontend', Copy) {
-    from buildFrontend.outputs
-    into "$buildDir/resources/main/static"
-    doLast {
-        println "copied frontend artifacts to $buildDir/resources/main/static"
-    }
-}
-
-tasks.register('cleanFrontend', Delete) {
-    delete "frontend/out", "frontend/.next", "$buildDir/resources/main/static"
-    doLast {
-        println "deleted frontend artifacts"
-    }
-}
-
-// region configure Spring's build dependency chain
-jar {
-    dependsOn copyFrontend
-}
-
-// endregion
-bootJar {
-    dependsOn copyFrontend
-}
-
-build {
-    dependsOn copyFrontend
-}
-
-bootRun {
-    dependsOn copyFrontend
-}
-
-clean {
-    dependsOn cleanFrontend
 }
