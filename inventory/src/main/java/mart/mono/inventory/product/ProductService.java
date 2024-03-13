@@ -1,5 +1,6 @@
 package mart.mono.inventory.product;
 
+import mart.mono.inventory.lib.IProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ProductService {
+public class ProductService implements IProductService {
 
     private final ProductRepository productRepository;
 

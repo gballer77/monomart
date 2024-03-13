@@ -1,7 +1,7 @@
 package mart.mono.commerce.purchase;
 
 import mart.mono.commerce.cart.CartItem;
-import mart.mono.inventory.product.ProductService;
+import mart.mono.inventory.lib.IProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +12,9 @@ public class PurchasesService {
 
     private final PurchasesRepository purchasesRepository;
 
-    private final ProductService productService;
+    private final IProductService productService;
 
-    public PurchasesService(PurchasesRepository purchasesRepository, ProductService productService) {
+    public PurchasesService(PurchasesRepository purchasesRepository, IProductService productService) {
         this.purchasesRepository = purchasesRepository;
         this.productService = productService;
     }

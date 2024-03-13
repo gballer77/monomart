@@ -25,14 +25,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-public class ShoppingTests {
+public class CommerceTests {
     @Autowired
     MockMvc mockMvc;
 
     @Autowired
     CartService cartService;
 
-    private static JSONObject getProductObject() throws JSONException {
+    private static JSONObject getV1ProductObject() throws JSONException {
         JSONObject jsonPayload = new JSONObject();
 
         jsonPayload.put("id", "d5d6d7d8-9c8b-4d3c-9f2e-1d5c5d2c5d2a")
@@ -46,15 +46,33 @@ public class ShoppingTests {
         return jsonPayload;
     }
 
+    private static JSONObject getV2ProductObject() throws JSONException {
+        JSONObject jsonPayload = new JSONObject();
+
+        jsonPayload.put("id", "d5d6d7d8-9c8b-4d3c-9f2e-1d5c5d2c5d2a")
+            .put("name", "Dell Laptop")
+            .put("price", "10.99");
+        return jsonPayload;
+    }
+
     @BeforeEach
     void clearCart() {
         cartService.removeAll();
     }
 
-    private ResultActions addItemToCart() throws Exception {
-        JSONObject jsonPayload = getProductObject();
+    private ResultActions addV1ItemToCart() throws Exception {
+        JSONObject jsonPayload = getV1ProductObject();
 
-        MockHttpServletRequestBuilder request = post("/api/cart")
+        MockHttpServletRequestBuilder request = post("/api/v1/cart")
+            .contentType(APPLICATION_JSON)
+            .content(jsonPayload.toString());
+
+        return mockMvc.perform(request);
+    }
+    private ResultActions addV2ItemToCart() throws Exception {
+        JSONObject jsonPayload = getV2ProductObject();
+
+        MockHttpServletRequestBuilder request = post("/api/v1/cart")
             .contentType(APPLICATION_JSON)
             .content(jsonPayload.toString());
 
@@ -62,32 +80,42 @@ public class ShoppingTests {
     }
 
     @Test
+    void v1AddToCartContractTest() throws Exception {
+        ResultActions resultActions = addV1ItemToCart();
+        resultActions.andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(jsonPath("$", hasKey("product")))
+            .andExpect(jsonPath("$", hasKey("id")))
+            .andExpect(jsonPath("$", hasKey("quantity")));
+    }
+
+    @Test
+    void v2AddToCartContractTest() throws Exception {
+        ResultActions resultActions = addV2ItemToCart();
+        resultActions.andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(jsonPath("$", hasKey("product")))
+            .andExpect(jsonPath("$", hasKey("id")))
+            .andExpect(jsonPath("$", hasKey("quantity")));
+    }
+
+    @Test
     void removeItemFromCartContractTest() throws Exception {
-        ResultActions result = addItemToCart();
+        ResultActions result = addV2ItemToCart();
         JSONObject resultJson = new JSONObject(result.andReturn().getResponse().getContentAsString());
 
         String uuid = resultJson.getString("id");
 
-        mockMvc.perform(put("/api/cart/{id}", uuid))
+        mockMvc.perform(put("/api/v1/cart/{id}", uuid))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.length()", equalTo(0)));
     }
 
     @Test
-    void addToCartContractTest() throws Exception {
-        ResultActions resultActions = addItemToCart();
-        resultActions.andExpect(status().isOk())
-            .andExpect(jsonPath("$", hasKey("product")))
-            .andExpect(jsonPath("$", hasKey("id")))
-            .andExpect(jsonPath("$", hasKey("quantity")))
-            .andDo(print());
-    }
-
-    @Test
     void getCartContractTest() throws Exception {
-        addItemToCart();
+        addV2ItemToCart();
 
-        mockMvc.perform(get("/api/cart"))
+        mockMvc.perform(get("/api/v1/cart"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.length()", greaterThanOrEqualTo(1)))
             .andExpect(jsonPath("$[0]", hasKey("product")))
@@ -100,7 +128,7 @@ public class ShoppingTests {
 
     @Test
     void checkoutCartContractTest() throws Exception {
-        mockMvc.perform(post("/api/cart/checkout"))
+        mockMvc.perform(post("/api/v1/cart/checkout"))
             .andExpect(status().isOk());
     }
 }
