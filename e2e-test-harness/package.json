@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "cypress": "^13.6.6",
+    "start-server-and-test": "^2.0.3"
+  },
+  "scripts": {
+    "app:start": "cd .. && ./gradlew bootRun",
+    "cypress:run": "cypress run",
+    "journey:test": "start-server-and-test app:start http-get://localhost:8080/ 'yarn cypress:run'"
+  }
+}

@@ -29,7 +29,7 @@ export const ShoppingCartItemList: React.FC<Props> = ({cartModel, updateShowCart
     <header>
       <h2>Cart</h2>
     </header>
-    <ul>
+    <ul id='cart-items'>
       {cartModel.getItems().map(({product}, i) =>
         <li key={i}>
           {product.name} ({product.price}) <button className={'remove-item'}
