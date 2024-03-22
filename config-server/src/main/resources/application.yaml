@@ -1,0 +1,14 @@
+server.port: 8083
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: 'https://gitlab.com/experimental/config-repo'
+          skipSslValidation: true
+          username: '${CI_USERNAME}'
+          password: '${CI_JOB_TOKEN}'

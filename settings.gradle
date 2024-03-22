@@ -13,3 +13,7 @@ pluginManagement {
     }
 }
 rootProject.name = 'monomart'
+
+include 'agw';
+include 'config-server';
+

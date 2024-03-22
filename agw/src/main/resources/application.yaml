@@ -2,20 +2,12 @@ server:
   port: 8888
 
 spring:
-  threads:
-    virtual:
-      enabled: true
-  cloud.gateway.mvc:
-    routesMap:
-#      monoMartCatalogRoutes:
-#        uri: http://localhost:8081
-#        predicates:
-#          - Path=/api/catalogs/**
-#      monoMartProductRoutes:
-#        uri: http://localhost:8081
-#        predicates:
-#          - Path=/api/products/**
-      monoMartRoutes:
-        uri: http://localhost:8080
-        predicates:
-          - Path=/**
+  config:
+    import: 'configserver:http://localhost:8083'
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: '*'
